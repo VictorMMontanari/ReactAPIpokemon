@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useApi } from '/home/victor/bootcamp/src/hooks/useApi.ts';
-import './App.css';
+import '/home/victor/bootcamp/src/style/result.css';
 
 function Busca() {
   const [searchTerm, setSearchTerm] = useState('');
