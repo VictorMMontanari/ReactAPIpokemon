@@ -1,36 +1,14 @@
-import React from "react";
-import "./result.css";
-
-function result() {
-
+import React, { useState } from "react";
+/* import "/home/victor/bootcamp/src/style/result.css"; // Certifique-se de que o caminho está correto
+import '/home/victor/bootcamp/src/style/busca.css';
+import { useApi } from '/home/victor/bootcamp/src/hooks/useApi.ts'; // Certifique-se de que o caminho está correto
+ */
+function Result() {
     return (
-        <body>
-            <header class="cabecalho">
-                <h1>Curso PHP</h1>
-                <h2>Índice dos Exercícios</h2>
-            </header>
-            <main class="principal">
-                <div class="conteudo">
-                    <nav class="modulos">
-                        <div class="modulo verde">
-                            <h3>Básico</h3>
-                            <ul>
-                                <li>
-                                    <a href="exercicio.php?dir=basico&file=ola">
-                                        Olá PHP
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </nav>
-                </div>
-            </main>
-            <footer class="rodape">
-
-            </footer>
-        </body>  
+        <div>
+            
+        </div>
     );
 }
 
-export default result;
-
+export default Result;
