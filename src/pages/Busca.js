@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { useApi } from '/home/victor/bootcamp/bootcamp/src/hooks/useApi.ts';
+import { useApi } from '/home/victor/bootcamp/src/hooks/useApi.ts';
 import './App.css';
 
-function App() {
+function Busca() {
   const [searchTerm, setSearchTerm] = useState('');
   const [searchResults, setSearchResults] = useState([]);
   const { pokemon } = useApi();
@@ -12,15 +12,24 @@ function App() {
       setSearchResults([]);
       return; // Não faça a busca se o campo estiver vazio
     }
-
+  
     try {
       const results = await pokemon(searchTerm);
-      setSearchResults([results]);
-      console.log(results);
+  
+      if (results) {
+        setSearchResults([results]);
+        console.log(results);
+      } else {
+        setSearchResults([]);
+        alert("Não encontrado o Pokemon, digite novamente"); // Exibir alerta de erro
+      }
     } catch (error) {
+      setSearchResults([]);
       console.error('Error fetching data:', error);
+      alert('Erro ao buscar o Pokemon. Por favor, tente novamente.'); // Exibir alerta de erro de busca
     }
   };
+    
 
   return (
     <header>
@@ -59,4 +68,4 @@ function App() {
   );
 }
 
-export default App;
+export default Busca;
