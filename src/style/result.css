@@ -68,9 +68,8 @@ body {
 }
 
 .modulos {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
+    display: inline-grid;
+    margin: 5px;
 }
 
 .modulo {
@@ -156,7 +155,7 @@ body {
     border-radius: 5px;
   }
 
-.button.verde{background-color: #4CAF50; border: 2px solid #4CAF50;} 
+.button.bug{background-color: #4CAF50; border: 2px solid #4CAF50;} 
 .button.dark{background-color: #332d1f; border: 2px solid #332d1f;} 
 .button.drag{background-color: #4f3fac; border: 2px solid #4f3fac;} 
 .button.elect{background-color: #dac71c; border: 2px solid #dac71c;} 

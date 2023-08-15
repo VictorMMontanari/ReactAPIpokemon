@@ -8,18 +8,6 @@ function Result() {
     const [searchResults, setSearchResults] = useState([]);
     const { pokemon, type } = useApi();
 
-    const handleSearchType = async (typeId) => {
-        try {
-            const typeInfo = await type(typeId);
-            const pokemonArray = typeInfo.pokemon.map(pokemon => pokemon.pokemon);
-            setSearchResults(await fetchPokemonImages(pokemonArray));
-        } catch (error) {
-            setSearchResults([]);
-            console.error('Error fetching data:', error);
-            alert('Erro ao buscar o tipo de Pokemon. Por favor, tente novamente.');
-        }
-    }
-
     const handleSearch = async () => {
         if (!searchTerm) {
             setSearchResults([]);
@@ -46,18 +34,42 @@ function Result() {
         }
     };
 
-    const fetchPokemonImages = async (pokemonArray) => {
+    const handleSearchType = async (typeId) => {
+        try {
+            const typeInfo = await type(typeId);
+            const pokemonArray = typeInfo.pokemon.map(pokemon => pokemon.pokemon);
+            setSearchResults(await fetchPokemonImages(pokemonArray, typeId));
+        } catch (error) {
+            setSearchResults([]);
+            console.error('Error fetching data:', error);
+            alert('Erro ao buscar o tipo de Pokemon. Por favor, tente novamente.');
+        }
+    }
+
+    const fetchPokemonImages = async (pokemonArray, typeId) => {
         const results = await Promise.all(
             pokemonArray.map(async (pokemon) => {
                 const response = await fetch(pokemon.url);
                 const data = await response.json();
                 return {
                     name: pokemon.name,
-                    image: data.sprites.front_default
+                    image: data.sprites.front_default,
+                    typeClass: getTypeClass(typeId) // Get the class name based on typeId
                 };
             })
         );
         return results;
+    };
+
+    const getTypeClass = (typeId) => {
+        const typeClassMapping = {
+            1: 'normal',  2: 'fhgt',  3: 'flying',  4: 'poison',  5: 'ground',
+            6: 'rock',  7: 'bug',  8: 'ghost',  9: 'steel',  10: 'fire',
+            11: 'water',  12: 'grass',  13: 'elect',  14: 'psychic',  15: 'ice',
+            16: 'dragon',  17: 'dark',
+        };
+    
+        return typeClassMapping[typeId] || 'verde';
     };
 
     return (
@@ -90,7 +102,7 @@ function Result() {
             <main className="principal">
                 <div className="conteudo">
                     <div className="cont">
-                        <button className="button verde" onClick={() => handleSearchType(7)}>Bug</button>
+                        <button className="button bug" onClick={() => handleSearchType(7)}>Bug</button>
                         <button class="button dark" onClick={() => handleSearchType(17)}>Dark</button>
                         <button class="button drag" onClick={() => handleSearchType(16)}>Dragon</button>
                         <button class="button elect" onClick={() => handleSearchType(13)}>Electric</button>
@@ -109,8 +121,8 @@ function Result() {
                         <button class="button water" onClick={() => handleSearchType(11)}>Water</button>
                     </div>
                     {searchResults.map(result => (
-                        <nav className="modulos" key={result.name}>
-                            <div className="modulo verde">
+                        <nav className={`modulos ${result.typeClass}`} key={result.name}>
+                            <div className={`modulo ${result.typeClass}`}>
                                 <h3>{result.name}</h3>
                                 <img src={result.image} alt={result.name} />
                             </div>
