@@ -137,3 +137,39 @@ body {
 
 .modulo.roxo-escuro { border: 2px solid #4A148C; }
 .modulo.roxo-escuro > h3 { background-color: #4A148C; }
+
+.cont {
+    display: block;
+    text-align: center;
+}
+
+.button {
+    margin-left: 4px;
+    margin-right: 4px;
+    margin-bottom: 7px;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 5px;
+  }
+
+.button.verde{background-color: #4CAF50; border: 2px solid #4CAF50;} 
+.button.dark{background-color: #332d1f; border: 2px solid #332d1f;} 
+.button.drag{background-color: #4f3fac; border: 2px solid #4f3fac;} 
+.button.elect{background-color: #dac71c; border: 2px solid #dac71c;} 
+.button.fhgt{background-color: #bb0505; border: 2px solid #bb0505;} 
+.button.fire{background-color: #ff7300; border: 2px solid #ff7300;} 
+.button.flying{background-color: #54b8c5; border: 2px solid #54b8c5;}
+.button.ghost{background-color: #470e75; border: 2px solid #470e75;}
+.button.grass{background-color: #03e60b; border: 2px solid #03e60b;} 
+.button.ground{background-color: #b3a52a; border: 2px solid #b3a52a;} 
+.button.ice{background-color: #00e1ff; border: 2px solid #00e1ff;}
+.button.normal{background-color: #afa57a; border: 2px solid #afa57a;}
+.button.poison{background-color: #ae00ff; border: 2px solid #ae00ff;}
+.button.psychic{background-color: #e54ceb; border: 2px solid #e54ceb;}
+.button.rock{background-color: #c09d00; border: 2px solid #c09d00;}
+.button.steel{background-color: #baccce; border: 2px solid #baccce;}
+.button.water{background-color: #008cff; border: 2px solid #008cff;}
