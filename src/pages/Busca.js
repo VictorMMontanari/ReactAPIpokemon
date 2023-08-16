@@ -2,23 +2,12 @@ import React, { useState } from "react";
 import "/home/victor/bootcamp/src/style/result.css";
 import '/home/victor/bootcamp/src/style/busca.css';
 import { useApi } from '/home/victor/bootcamp/src/hooks/useApi.ts';
+import {formatName, getTypeClass, getTypeNames, getTypeStyle, formatType} from "../components/format";
 
 function Result() {
     const [searchTerm, setSearchTerm] = useState('');
     const [searchResults, setSearchResults] = useState([]);
     const { pokemon, type } = useApi();
-
-    const handleSearchType = async (typeId) => {
-        try {
-            const typeInfo = await type(typeId);
-            const pokemonArray = typeInfo.pokemon.map(pokemon => pokemon.pokemon);
-            setSearchResults(await fetchPokemonImages(pokemonArray));
-        } catch (error) {
-            setSearchResults([]);
-            console.error('Error fetching data:', error);
-            alert('Erro ao buscar o tipo de Pokemon. Por favor, tente novamente.');
-        }
-    }
 
     const handleSearch = async () => {
         if (!searchTerm) {
@@ -32,9 +21,9 @@ function Result() {
             if (results) {
                 setSearchResults([{
                     name: results.name,
-                    image: results.sprites.front_default
+                    image: results.sprites.front_default,
+                    typeNames: results.types.map(typeInfo => typeInfo.type.name) // Get the type names
                 }]);
-                console.log(results);
             } else {
                 setSearchResults([]);
                 alert("Não encontrado o Pokemon, digite novamente");
@@ -46,14 +35,28 @@ function Result() {
         }
     };
 
-    const fetchPokemonImages = async (pokemonArray) => {
+    const handleSearchType = async (typeId) => {
+        try {
+            const typeInfo = await type(typeId);
+            const pokemonArray = typeInfo.pokemon.map(pokemon => pokemon.pokemon);
+            setSearchResults(await fetchPokemonImages(pokemonArray, typeId));
+        } catch (error) {
+            setSearchResults([]);
+            console.error('Error fetching data:', error);
+            alert('Erro ao buscar o tipo de Pokemon. Por favor, tente novamente.');
+        }
+    }
+
+    const fetchPokemonImages = async (pokemonArray, typeId) => {
         const results = await Promise.all(
             pokemonArray.map(async (pokemon) => {
                 const response = await fetch(pokemon.url);
                 const data = await response.json();
                 return {
                     name: pokemon.name,
-                    image: data.sprites.front_default
+                    image: data.sprites.front_default,
+                    typeClass: getTypeClass(typeId), // Get the class name based on typeId
+                    typeNames: data.types.map(typeInfo => typeInfo.type.name) // Get the type names
                 };
             })
         );
@@ -90,7 +93,7 @@ function Result() {
             <main className="principal">
                 <div className="conteudo">
                     <div className="cont">
-                        <button className="button verde" onClick={() => handleSearchType(7)}>Bug</button>
+                        <button className="button bug" onClick={() => handleSearchType(7)}>Bug</button>
                         <button class="button dark" onClick={() => handleSearchType(17)}>Dark</button>
                         <button class="button drag" onClick={() => handleSearchType(16)}>Dragon</button>
                         <button class="button elect" onClick={() => handleSearchType(13)}>Electric</button>
@@ -106,13 +109,20 @@ function Result() {
                         <button class="button psychic" onClick={() => handleSearchType(14)}>Psychic</button>
                         <button class="button rock" onClick={() => handleSearchType(6)}>Rock</button>
                         <button class="button steel" onClick={() => handleSearchType(9)}>Steel</button>
-                        <button class="button water" onClick={() => handleSearchType(11)}>Water</button>
+                        <button class="button water" onClick={() => handleSearchType(11)}>Water</button> 
                     </div>
                     {searchResults.map(result => (
-                        <nav className="modulos" key={result.name}>
-                            <div className="modulo verde">
-                                <h3>{result.name}</h3>
+                        <nav className={`modulos ${result.typeClass}`} key={result.name}>
+                            <div className={`modulo ${result.typeClass}`}>
+                                <h3>{formatName(result.name)}</h3>
                                 <img src={result.image} alt={result.name} />
+                                <div className="tipos">
+                                    {result.typeNames.map((type, index) => (
+                                        <span key={type} className={`tipo ${getTypeStyle(type)}`}>
+                                            {formatType(type)}
+                                        </span>
+                                    ))}
+                                </div>
                             </div>
                         </nav>
                     ))}

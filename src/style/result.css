@@ -73,7 +73,9 @@ body {
 }
 
 .modulo {
-    flex-basis: 3%;
+    text-align: center;
+    width: 12rem;
+    height: 15rem;
     margin-bottom: 20px;
     border-radius: 5px;
 }
@@ -113,7 +115,6 @@ body {
 
 .modulo.undefined{background-color: #ffffff; border: 2px solid #000000;} 
 .modulo.undefined > h3 { background-color: #000000;}
-
 .modulo.bug{background-color: #4CAF50; border: 2px solid #4CAF50;} 
 .modulo.bug > h3 { background-color: #282828; border-radius: 5px;}
 .modulo.dark{background-color: #332d1f; border: 2px solid #332d1f;} 
@@ -148,6 +149,32 @@ body {
 .modulo.steel > h3 { background-color: #8b9799; border-radius: 5px;}
 .modulo.water{background-color: #008cff; border: 2px solid #008cff;}
 .modulo.water > h3 { background-color: #1867c0; border-radius: 5px;}
+
+.tipo.bug{background-color: #4b9b4e; border: 2px solid #4b9b4e;} 
+.tipo.dark{background-color: #332d1f; border: 2px solid #332d1f;} 
+.tipo.dragon{background-color: #4f3fac; border: 2px solid #4f3fac;}
+.tipo.electric{background-color: #dac71c; border: 2px solid #dac71c;} 
+.tipo.fighting{background-color: #bb0505; border: 2px solid #bb0505;} 
+.tipo.fire{background-color: #ff7300; border: 2px solid #ff7300;} 
+.tipo.flying{background-color: #54b8c5; border: 2px solid #54b8c5;}
+.tipo.ghost{background-color: #470e75; border: 2px solid #470e75;}
+.tipo.grass{background-color: #03e60b; border: 2px solid #03e60b;} 
+.tipo.ground{background-color: #b3a52a; border: 2px solid #b3a52a;} 
+.tipo.ice{background-color: #00e1ff; border: 2px solid #00e1ff;}
+.tipo.normal{background-color: #afa57a; border: 2px solid #afa57a;}
+.tipo.poison{background-color: #ae00ff; border: 2px solid #ae00ff;}
+.tipo.psychic{background-color: #e54ceb; border: 2px solid #e54ceb;}
+.tipo.rock{background-color: #c09d00; border: 2px solid #c09d00;}
+.tipo.steel{background-color: #baccce; border: 2px solid #baccce;}
+.tipo.water{background-color: #008cff; border: 2px solid #008cff;}
+.tipo.fairy{background-color: #fa92f1; border: 2px solid #fa92f1;}
+
+.tipo {
+    display: inline-block;
+    padding: 4px 8px;
+    border-radius: 4px;
+    margin-right: 4px;
+}
 
 .cont {
     display: block;

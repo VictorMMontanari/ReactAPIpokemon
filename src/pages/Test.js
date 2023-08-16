@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "/home/victor/bootcamp/src/style/result.css";
 import '/home/victor/bootcamp/src/style/busca.css';
 import { useApi } from '/home/victor/bootcamp/src/hooks/useApi.ts';
+import {formatName, getTypeClass, getTypeNames, getTypeStyle, formatType} from "../components/format";
 
 function Result() {
     const [searchTerm, setSearchTerm] = useState('');
@@ -20,9 +21,9 @@ function Result() {
             if (results) {
                 setSearchResults([{
                     name: results.name,
-                    image: results.sprites.front_default
+                    image: results.sprites.front_default,
+                    typeNames: results.types.map(typeInfo => typeInfo.type.name) // Get the type names
                 }]);
-                console.log(results);
             } else {
                 setSearchResults([]);
                 alert("Não encontrado o Pokemon, digite novamente");
@@ -54,22 +55,12 @@ function Result() {
                 return {
                     name: pokemon.name,
                     image: data.sprites.front_default,
-                    typeClass: getTypeClass(typeId) // Get the class name based on typeId
+                    typeClass: getTypeClass(typeId), // Get the class name based on typeId
+                    typeNames: data.types.map(typeInfo => typeInfo.type.name) // Get the type names
                 };
             })
         );
         return results;
-    };
-
-    const getTypeClass = (typeId) => {
-        const typeClassMapping = {
-            1: 'normal',  2: 'fhgt',  3: 'flying',  4: 'poison',  5: 'ground',
-            6: 'rock',  7: 'bug',  8: 'ghost',  9: 'steel',  10: 'fire',
-            11: 'water',  12: 'grass',  13: 'elect',  14: 'psychic',  15: 'ice',
-            16: 'dragon',  17: 'dark',
-        };
-    
-        return typeClassMapping[typeId] || 'verde';
     };
 
     return (
@@ -118,13 +109,20 @@ function Result() {
                         <button class="button psychic" onClick={() => handleSearchType(14)}>Psychic</button>
                         <button class="button rock" onClick={() => handleSearchType(6)}>Rock</button>
                         <button class="button steel" onClick={() => handleSearchType(9)}>Steel</button>
-                        <button class="button water" onClick={() => handleSearchType(11)}>Water</button>
+                        <button class="button water" onClick={() => handleSearchType(11)}>Water</button> 
                     </div>
                     {searchResults.map(result => (
                         <nav className={`modulos ${result.typeClass}`} key={result.name}>
                             <div className={`modulo ${result.typeClass}`}>
-                                <h3>{result.name}</h3>
+                                <h3>{formatName(result.name)}</h3>
                                 <img src={result.image} alt={result.name} />
+                                <div className="tipos">
+                                    {result.typeNames.map((type, index) => (
+                                        <span key={type} className={`tipo ${getTypeStyle(type)}`}>
+                                            {formatType(type)}
+                                        </span>
+                                    ))}
+                                </div>
                             </div>
                         </nav>
                     ))}
