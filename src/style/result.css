@@ -54,6 +54,7 @@ body {
     background-color: #fff;
     padding: 20px;
     box-shadow: 0px 0px 25px 0px rgba(0, 0, 0, 0.2);
+    text-align: center;
 }
 
 .rodape {
@@ -151,22 +152,22 @@ body {
 .modulo.water > h3 { background-color: #1867c0; border-radius: 5px;}
 
 .tipo.bug{background-color: #4b9b4e; border: 2px solid #4b9b4e;} 
-.tipo.dark{background-color: #332d1f; border: 2px solid #332d1f;} 
-.tipo.dragon{background-color: #4f3fac; border: 2px solid #4f3fac;}
-.tipo.electric{background-color: #dac71c; border: 2px solid #dac71c;} 
-.tipo.fighting{background-color: #bb0505; border: 2px solid #bb0505;} 
-.tipo.fire{background-color: #ff7300; border: 2px solid #ff7300;} 
-.tipo.flying{background-color: #54b8c5; border: 2px solid #54b8c5;}
-.tipo.ghost{background-color: #470e75; border: 2px solid #470e75;}
-.tipo.grass{background-color: #03e60b; border: 2px solid #03e60b;} 
-.tipo.ground{background-color: #b3a52a; border: 2px solid #b3a52a;} 
-.tipo.ice{background-color: #00e1ff; border: 2px solid #00e1ff;}
-.tipo.normal{background-color: #afa57a; border: 2px solid #afa57a;}
-.tipo.poison{background-color: #ae00ff; border: 2px solid #ae00ff;}
-.tipo.psychic{background-color: #e54ceb; border: 2px solid #e54ceb;}
-.tipo.rock{background-color: #c09d00; border: 2px solid #c09d00;}
-.tipo.steel{background-color: #baccce; border: 2px solid #baccce;}
-.tipo.water{background-color: #008cff; border: 2px solid #008cff;}
+.tipo.dark{background-color: #4e493c; border: 2px solid #4e493c;} 
+.tipo.dragon{background-color: #3c2e89; border: 2px solid #3c2e89;}
+.tipo.electric{background-color: #a89a16; border: 2px solid #a89a16;} 
+.tipo.fighting{background-color: #f10606; border: 2px solid #f10606;} 
+.tipo.fire{background-color: #d35f01; border: 2px solid #d35f01;} 
+.tipo.flying{background-color: #3c939e; border: 2px solid #3c939e;}
+.tipo.ghost{background-color: #6b15b1; border: 2px solid #6b15b1;}
+.tipo.grass{background-color: #04c20a; border: 2px solid #04c20a;} 
+.tipo.ground{background-color: #d3c22c; border: 2px solid #d3c22c;} 
+.tipo.ice{background-color: #03bed6; border: 2px solid #03bed6;}
+.tipo.normal{background-color: #d1c590; border: 2px solid #d1c590;}
+.tipo.poison{background-color: #c448fd; border: 2px solid #c448fd;}
+.tipo.psychic{background-color: #fa5eff; border: 2px solid #fa5eff;}
+.tipo.rock{background-color: #dbb300; border: 2px solid #dbb300;}
+.tipo.steel{background-color: #dff9fc; border: 2px solid #dff9fc;}
+.tipo.water{background-color: #42a9fd; border: 2px solid #42a9fd;}
 .tipo.fairy{background-color: #fa92f1; border: 2px solid #fa92f1;}
 
 .tipo {
