@@ -110,32 +110,44 @@ body {
     background-color: #EEE;
 }
 
-.modulo.verde { border: 2px solid #4CAF50; }
-.modulo.verde > h3 { background-color: #4CAF50; }
 
-.modulo.vermelho { border: 2px solid #F44336; }
-.modulo.vermelho > h3 { background-color: #F44336; }
+.modulo.undefined{background-color: #ffffff; border: 2px solid #000000;} 
+.modulo.undefined > h3 { background-color: #000000;}
 
-.modulo.azul { border: 2px solid #2196F3; }
-.modulo.azul > h3 { background-color: #2196F3; }
-
-.modulo.roxo { border: 2px solid #9C27B0; }
-.modulo.roxo > h3 { background-color: #9C27B0; }
-
-.modulo.laranja { border: 2px solid #FF9800; }
-.modulo.laranja > h3 { background-color: #FF9800; }
-
-.modulo.verde-escuro { border: 2px solid #1B5E20; }
-.modulo.verde-escuro > h3 { background-color: #1B5E20; }
-
-.modulo.vermelho-escuro { border: 2px solid #B71C1C; }
-.modulo.vermelho-escuro > h3 { background-color: #B71C1C; }
-
-.modulo.azul-escuro { border: 2px solid #0D47A1; }
-.modulo.azul-escuro > h3 { background-color: #0D47A1; }
-
-.modulo.roxo-escuro { border: 2px solid #4A148C; }
-.modulo.roxo-escuro > h3 { background-color: #4A148C; }
+.modulo.bug{background-color: #4CAF50; border: 2px solid #4CAF50;} 
+.modulo.bug > h3 { background-color: #282828; border-radius: 5px;}
+.modulo.dark{background-color: #332d1f; border: 2px solid #332d1f;} 
+.modulo.dark > h3 { background-color: #7272725b; border-radius: 5px;}
+.modulo.dragon{background-color: #4f3fac; border: 2px solid #4f3fac;}
+.modulo.dragon > h3 { background-color: #332d1f; border-radius: 5px;} 
+.modulo.elect{background-color: #dac71c; border: 2px solid #dac71c;} 
+.modulo.elect > h3 { background-color: #332d1f; border-radius: 5px;}
+.modulo.fhgt{background-color: #bb0505; border: 2px solid #bb0505;} 
+.modulo.fhgt > h3 { background-color: #080505b8; border-radius: 5px;}
+.modulo.fire{background-color: #ff7300; border: 2px solid #ff7300;} 
+.modulo.fire > h3 { background-color: #080505b8; border-radius: 5px;}
+.modulo.flying{background-color: #54b8c5; border: 2px solid #54b8c5;}
+.modulo.flying > h3 { background-color: #1867c0; border-radius: 5px;}
+.modulo.ghost{background-color: #470e75; border: 2px solid #470e75;}
+.modulo.ghost > h3 { background-color: #3116c9c2; border-radius: 5px;}
+.modulo.grass{background-color: #03e60b; border: 2px solid #03e60b;} 
+.modulo.grass > h3 { background-color: #156a00c2; border-radius: 5px;}
+.modulo.ground{background-color: #b3a52a; border: 2px solid #b3a52a;} 
+.modulo.ground > h3 { background-color: #837818; border-radius: 5px;}
+.modulo.ice{background-color: #00e1ff; border: 2px solid #00e1ff;}
+.modulo.ice > h3 { background-color: #1867c0; border-radius: 5px;}
+.modulo.normal{background-color: #afa57a; border: 2px solid #afa57a;}
+.modulo.normal > h3 { background-color: #8b8364; border-radius: 5px;}
+.modulo.poison{background-color: #ae00ff; border: 2px solid #ae00ff;}
+.modulo.poison > h3 { background-color: #7f03b9; border-radius: 5px;}
+.modulo.psychic{background-color: #e54ceb; border: 2px solid #e54ceb;}
+.modulo.psychic > h3 { background-color: #a439a9; border-radius: 5px;}
+.modulo.rock{background-color: #c09d00; border: 2px solid #c09d00;}
+.modulo.rock > h3 { background-color: #917702; border-radius: 5px;}
+.modulo.steel{background-color: #baccce; border: 2px solid #baccce;}
+.modulo.steel > h3 { background-color: #8b9799; border-radius: 5px;}
+.modulo.water{background-color: #008cff; border: 2px solid #008cff;}
+.modulo.water > h3 { background-color: #1867c0; border-radius: 5px;}
 
 .cont {
     display: block;
