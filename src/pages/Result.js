@@ -128,6 +128,7 @@ function Result() {
                                     ))}
                                 </div>
                                 <span className="pokeid">#{result.pokemonId.toString().padStart(3, '0')}</span>
+                                
                             </div>
                         </nav>
                     ))}
