@@ -21,7 +21,8 @@ function Result() {
             if (results) {
                 setSearchResults([{
                     name: results.name,
-                    image: results.sprites.front_default,
+                    image: results.sprites.other["official-artwork"].front_default,
+                    pokemonId: results.id,
                     typeNames: results.types.map(typeInfo => typeInfo.type.name) // Get the type names
                 }]);
             } else {
@@ -53,8 +54,9 @@ function Result() {
                 const response = await fetch(pokemon.url);
                 const data = await response.json();
                 return {
+                    pokemonId: data.id,
                     name: pokemon.name,
-                    image: data.sprites.front_default,
+                    image: data.sprites.other["official-artwork"].front_default,
                     typeClass: getTypeClass(typeId), // Get the class name based on typeId
                     typeNames: data.types.map(typeInfo => typeInfo.type.name) // Get the type names
                 };
@@ -114,8 +116,10 @@ function Result() {
                     {searchResults.map(result => (
                         <nav className={`modulos ${result.typeClass}`} key={result.name}>
                             <div className={`modulo ${result.typeClass}`}>
-                                <h3>{formatName(result.name)}</h3>
-                                <img src={result.image} alt={result.name} />
+                                <div className="t4">
+                                    <h4 className="th4">{formatName(result.name)}</h4>
+                                </div>
+                                <img className="img" src={result.image} alt={result.name} />
                                 <div className="tipos">
                                     {result.typeNames.map((type, index) => (
                                         <span key={type} className={`tipo ${getTypeStyle(type)}`}>
@@ -123,6 +127,7 @@ function Result() {
                                         </span>
                                     ))}
                                 </div>
+                                <span className="pokeid">#{result.pokemonId.toString().padStart(3, '0')}</span>
                             </div>
                         </nav>
                     ))}
