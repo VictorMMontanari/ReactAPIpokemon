@@ -94,28 +94,11 @@ function Result() {
             </header>
             <main className="principal">
                 <div className="conteudo">
-                    <div className="cont">
-                        <button className="button bug" onClick={() => handleSearchType(7)}>Bug</button>
-                        <button class="button dark" onClick={() => handleSearchType(17)}>Dark</button>
-                        <button class="button drag" onClick={() => handleSearchType(16)}>Dragon</button>
-                        <button class="button elect" onClick={() => handleSearchType(13)}>Electric</button>
-                        <button class="button fhgt" onClick={() => handleSearchType(2)}>Fight</button>
-                        <button class="button fire" onClick={() => handleSearchType(10)}>Fire</button>
-                        <button class="button flying" onClick={() => handleSearchType(3)}>Flying</button>
-                        <button class="button ghost" onClick={() => handleSearchType(8)}>Ghost</button>
-                        <button class="button grass" onClick={() => handleSearchType(12)}>Grass</button>
-                        <button class="button ground" onClick={() => handleSearchType(5)}>Ground</button>
-                        <button class="button ice" onClick={() => handleSearchType(15)}>Ice</button>
-                        <button class="button normal" onClick={() => handleSearchType(1)}>Normal</button>
-                        <button class="button poison" onClick={() => handleSearchType(4)}>Poison</button>
-                        <button class="button psychic" onClick={() => handleSearchType(14)}>Psychic</button>
-                        <button class="button rock" onClick={() => handleSearchType(6)}>Rock</button>
-                        <button class="button steel" onClick={() => handleSearchType(9)}>Steel</button>
-                        <button class="button water" onClick={() => handleSearchType(11)}>Water</button> 
+                    <div className="cont">    
                     </div>
                     {searchResults.map(result => (
-                        <nav className={`modulos ${result.typeClass}`} key={result.name}>
-                            <div className={`modulo ${result.typeClass}`}>
+                        <nav className={`modulos1 ${result.typeClass}`} key={result.name}>
+                            <div className={`modulo1 ${result.typeClass}`}>
                                 <div className="t4">
                                     <h4 className="th4">{formatName(result.name)}</h4>
                                 </div>

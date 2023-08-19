@@ -58,7 +58,7 @@ function Result() {
                     name: pokemon.name,
                     image: data.sprites.other["official-artwork"].front_default,
                     typeClass: getTypeClass(typeId), // Get the class name based on typeId
-                    typeNames: data.types.map(typeInfo => typeInfo.type.name) // Get the type names
+                    typeNames: data.types.map(typeInfo => typeInfo.type.name) // Get the type names     
                 };
             })
         );
@@ -119,7 +119,9 @@ function Result() {
                                 <div className="t4">
                                     <h4 className="th4">{formatName(result.name)}</h4>
                                 </div>
-                                <img className="img" src={result.image} alt={result.name} />
+                                <a href={`/result?id=${result.pokemonId}`}>
+                                    <img className="img" src={result.image} alt={result.name} />
+                                </a>
                                 <div className="tipos">
                                     {result.typeNames.map((type, index) => (
                                         <span key={type} className={`tipo ${getTypeStyle(type)}`}>

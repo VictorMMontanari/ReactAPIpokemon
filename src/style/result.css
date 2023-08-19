@@ -130,7 +130,45 @@ body {
     background-color: #EEE;
 }
 
+.tipo {
+    display: inline-block;
+    padding: 4px 8px;
+    border-radius: 4px;
+    margin-right: 4px;
+}
 
+.pokeid {
+    display: block;
+    padding-top: 20px;
+}
+
+.link {
+    margin-right: 10px;
+}
+
+.img {
+    width: 100px;
+    height: 100px;
+    margin: 10px; 
+  }
+
+.cont {
+    display: block;
+    text-align: center;
+}
+
+.button {
+    margin-left: 4px;
+    margin-right: 4px;
+    margin-bottom: 7px;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 5px;
+  }
 
 .modulo.undefined{background-color: #ffffff; border: 2px solid #000000;} 
 .modulo.undefined > .t4 { background-color: #000000;}
@@ -188,41 +226,6 @@ body {
 .tipo.water{background-color: #42a9fd; border: 2px solid ;}
 .tipo.fairy{background-color: #fa92f1; border: 2px solid ;}
 
-.tipo {
-    display: inline-block;
-    padding: 4px 8px;
-    border-radius: 4px;
-    margin-right: 4px;
-}
-
-.pokeid {
-    display: block;
-    padding-top: 20px;
-}
-
-.img {
-    width: 100px;
-    height: 100px; 
-  }
-
-.cont {
-    display: block;
-    text-align: center;
-}
-
-.button {
-    margin-left: 4px;
-    margin-right: 4px;
-    margin-bottom: 7px;
-    color: white;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    border-radius: 5px;
-  }
-
 .button.bug{background-color: #4CAF50; border: 2px solid #4CAF50;} 
 .button.dark{background-color: #332d1f; border: 2px solid #332d1f;} 
 .button.drag{background-color: #4f3fac; border: 2px solid #4f3fac;} 
@@ -240,3 +243,21 @@ body {
 .button.rock{background-color: #c09d00; border: 2px solid #c09d00;}
 .button.steel{background-color: #baccce; border: 2px solid #baccce;}
 .button.water{background-color: #008cff; border: 2px solid #008cff;}
+
+/* --------------------Pg Results------------------------- */
+
+.modulo1.undefined{background-color: #ffffff; border: 2px solid #000000;} 
+.modulo1.undefined > .t4 { background-color: #000000;}
+
+.modulos1 {
+    display: inline-grid;
+    margin: 5px;
+}
+
+.modulo1 {
+    text-align: center;
+    width: 70rem;
+    height: 43rem;
+    margin-bottom: 20px;
+    border-radius: 5px;
+}
