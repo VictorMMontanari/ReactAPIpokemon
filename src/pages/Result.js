@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState, useEffect } from "react";
 import "/home/victor/bootcamp/src/style/result.css";
 import '/home/victor/bootcamp/src/style/busca.css';
 import { useApi } from '/home/victor/bootcamp/src/hooks/useApi.ts';
@@ -64,6 +64,22 @@ function Result() {
         );
         return results;
     };
+
+    /* useEffect(() => {
+        const fetchData = async () => {
+          try {
+            const urlParams = new URLSearchParams(window.location.search);
+            const id = urlParams.get("id");
+            const searchTerm = id;
+      
+            
+          } catch (error) {
+            console.error(error);
+          }
+        };
+      
+        fetchData();
+      }, []); */
 
     return (
         <div>
