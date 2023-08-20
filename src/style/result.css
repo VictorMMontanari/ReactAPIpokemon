@@ -261,3 +261,12 @@ body {
     margin-bottom: 20px;
     border-radius: 5px;
 }
+
+.evolutioImagesContainer {
+    display: flex;
+    justify-content: center;
+}
+
+.evolution-image {
+    margin: 0 10px; /* Ajuste as margens conforme necessário para o espaçamento */
+}

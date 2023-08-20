@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import "/home/victor/bootcamp/src/style/result.css";
-import '/home/victor/bootcamp/src/style/busca.css';
-import { useApi } from '/home/victor/bootcamp/src/hooks/useApi.ts';
+import "../style/result.css";
+import '../style/busca.css';
+import { useApi } from '../hooks/useApi';
 import {formatName, getTypeClass, getTypeNames, getTypeStyle, formatType} from "../components/format";
 
 function Result() {

@@ -20,5 +20,15 @@ export const useApi = () => ({
         } catch (error) {
             throw error;
         }
+    },
+    evolutionChain: async (speciesUrl: string) => {
+        try {
+            const response = await axios.get(speciesUrl);
+            const evolutionChainUrl = response.data.evolution_chain.url;
+            const evolutionChainResponse = await axios.get(evolutionChainUrl);
+            return evolutionChainResponse.data;
+        } catch (error) {
+            throw error;
+        }
     }
 });
