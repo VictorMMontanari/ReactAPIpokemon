@@ -1,29 +1,44 @@
 import { useState, useEffect } from "react";
-import "/home/victor/bootcamp/src/style/result.css";
-import '/home/victor/bootcamp/src/style/busca.css';
-import { useApi } from '/home/victor/bootcamp/src/hooks/useApi.ts';
+import "../style/result.css";
+import '../style/busca.css';
+import { useApi } from '../hooks/useApi';
 import {formatName, getTypeClass, getTypeNames, getTypeStyle, formatType} from "../components/format";
 
 function Result() {
+    const { pokemon, evolutionChain } = useApi(); // Certifique-se de que useApi está retornando uma função pokemon
     const [searchTerm, setSearchTerm] = useState('');
     const [searchResults, setSearchResults] = useState([]);
-    const { pokemon, type } = useApi();
+    const [evolutionImages, setEvolutionImages] = useState([]);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const urlParams = new URLSearchParams(window.location.search);
+                const id = urlParams.get("id");
+                setSearchTerm(id); // Use setSearchTerm para atualizar o estado
+            } catch (error) {
+                console.error(error);
+            }
+        };
+
+        fetchData();
+    }, []);
 
     const handleSearch = async () => {
         if (!searchTerm) {
             setSearchResults([]);
             return;
         }
-    
+
         try {
             const results = await pokemon(searchTerm);
-    
+
             if (results) {
                 setSearchResults([{
                     name: results.name,
                     image: results.sprites.other["official-artwork"].front_default,
                     pokemonId: results.id,
-                    typeNames: results.types.map(typeInfo => typeInfo.type.name) // Get the type names
+                    typeNames: results.types.map(typeInfo => typeInfo.type.name)
                 }]);
             } else {
                 setSearchResults([]);
@@ -36,75 +51,92 @@ function Result() {
         }
     };
 
-    const handleSearchType = async (typeId) => {
-        try {
-            const typeInfo = await type(typeId);
-            const pokemonArray = typeInfo.pokemon.map(pokemon => pokemon.pokemon);
-            setSearchResults(await fetchPokemonImages(pokemonArray, typeId));
-        } catch (error) {
-            setSearchResults([]);
-            console.error('Error fetching data:', error);
-            alert('Erro ao buscar o tipo de Pokemon. Por favor, tente novamente.');
-        }
-    }
+    useEffect(() => {
+        handleSearch();
+    }, [searchTerm]);
 
-    const fetchPokemonImages = async (pokemonArray, typeId) => {
-        const results = await Promise.all(
-            pokemonArray.map(async (pokemon) => {
-                const response = await fetch(pokemon.url);
-                const data = await response.json();
-                return {
-                    pokemonId: data.id,
-                    name: pokemon.name,
-                    image: data.sprites.other["official-artwork"].front_default,
-                    typeClass: getTypeClass(typeId), // Get the class name based on typeId
-                    typeNames: data.types.map(typeInfo => typeInfo.type.name) // Get the type names
-                };
-            })
-        );
-        return results;
-    };
-
-    /* useEffect(() => {
+    useEffect(() => {
         const fetchData = async () => {
-          try {
-            const urlParams = new URLSearchParams(window.location.search);
-            const id = urlParams.get("id");
-            const searchTerm = id;
-      
-            
-          } catch (error) {
-            console.error(error);
-          }
+            try {
+                const pokemonData = await pokemon(searchTerm);
+                const speciesUrl = pokemonData.species.url;
+                const chainData = await evolutionChain(speciesUrl);
+                console.log('Evolution Chain:', chainData);
+            } catch (error) {
+                console.error(error);
+            }
         };
-      
+
         fetchData();
-      }, []); */
+    }, [searchTerm]);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const pokemonData = await pokemon(searchTerm);
+                const speciesUrl = pokemonData.species.url;
+                const chainData = await evolutionChain(speciesUrl);
+                console.log('Evolution Chain:', chainData);
+
+                const evolutions = [];
+                const extractEvolutions = (evolution) => {
+                    const evolutionDetails = {
+                        name: evolution.species.name,
+                        image: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${evolution.species.url.split("/")[6]}.png`,
+                        level: null, // Inicializamos como nulo
+                        item: null   // Inicializamos como nulo
+                    };
+
+                    if (evolution.evolves_to.length > 0) {
+                        const evolutionDetail = evolution.evolves_to[0];
+
+                        if (evolutionDetail.evolution_details.length > 0) {
+                            const evolutionDetailInfo = evolutionDetail.evolution_details[0];
+
+                            if (evolutionDetailInfo.min_level !== undefined) {
+                                evolutionDetails.level = evolutionDetailInfo.min_level;
+                            }
+
+                            if (evolutionDetailInfo.item !== null) {
+                                const itemName = evolutionDetailInfo.item.name;
+                                evolutionDetails.item = {
+                                    name: itemName,
+                                    image: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/${itemName}.png`
+                                };
+                            }
+                            if (evolutionDetailInfo.min_happiness !== undefined) {
+                                evolutionDetails.happiness = evolutionDetailInfo.min_happiness;
+                            }
+                        }
+                    }
+
+                    evolutions.push(evolutionDetails);
+
+                    if (evolution.evolves_to.length > 0) {
+                        evolution.evolves_to.forEach((subEvolution) => {
+                            extractEvolutions(subEvolution);
+                        });
+                    }
+                };
+
+                extractEvolutions(chainData.chain);
+
+                setEvolutionImages(evolutions);
+            } catch (error) {
+                console.error(error);
+            }
+        };
+
+        fetchData();
+    }, [searchTerm]);
+ 
 
     return (
         <div>
             <header className="cabecalho">
-                <h1>PokeAPI</h1>
                 <div className='acertar'>
-                    <div className="input-group mb-3">
-                        <input
-                            type="text"
-                            className="form-control"
-                            placeholder="Recipient's username"
-                            aria-label="Recipient's username"
-                            aria-describedby="basic-addon2"
-                            value={searchTerm}
-                            onChange={e => setSearchTerm(e.target.value)}
-                        />
-                        <div className="input-group-append">
-                            <button
-                                className="btn btn-outline-secondary"
-                                type="button"
-                                onClick={handleSearch}
-                            >
-                                Search
-                            </button>
-                        </div>
+                    <div className="input-group mb-3">  
+                        <h1>PokeAPI</h1>
                     </div>
                 </div>
             </header>
@@ -127,7 +159,27 @@ function Result() {
                                     ))}
                                 </div>
                                 <span className="pokeid">#{result.pokemonId.toString().padStart(3, '0')}</span>
-                                
+                                <div className="evolutioImagesContainer">
+                                    {evolutionImages.map((evolution, index) => (
+                                        <div key={index} className="evolution-image">
+                                            <h4>{formatName(evolution.name)}</h4>
+                                            <img className="img" src={evolution.image} alt={evolution.name} />
+                                            {evolution.level !== null && <p>Level: {evolution.level}</p>}
+                                            {evolution.item !== null && (
+                                                <div>
+                                                    <img
+                                                        src={evolution.item.image}
+                                                        alt={evolution.item.name}
+                                                        title={evolution.item.name} // Adicionar o atributo title
+                                                    />
+                                                </div> 
+                                            )}
+                                            {evolution.happiness !== undefined && (
+                                                <p> {evolution.happiness}</p>
+                                            )}
+                                        </div>
+                                    ))}
+                                </div>
                             </div>
                         </nav>
                     ))}
