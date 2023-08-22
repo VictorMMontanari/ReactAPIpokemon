@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
-import "../style/result.css";
-import { useApi } from '../hooks/useApi';
-import EeveeComponent from "../components/EeveeComponent";
-import OtherPokemonComponent from "../components/OtherPokemonComponent";
+import { formatName, getTypeStyle, formatType } from "./format";
+import "../style/eevee.css";
+import { useApi } from "../hooks/useApi";
 
-function Result() {
+const EeveeComponent = ({ name, image, typeNames, pokemonId }) => {
     const { pokemon, evolutionChain } = useApi();
     const [searchTerm, setSearchTerm] = useState('');
     const [searchResults, setSearchResults] = useState([]);
@@ -92,48 +91,40 @@ function Result() {
     }, [searchTerm]);
 
     return (
-        <div>
-            <header className="cabecalho">
-                <div className='acertar'>
-                    <div className="input-group mb-3">  
-                        <h1>PokeAPI</h1>
-                    </div>
-                </div>
-            </header>
-            <main className="principal">
-                <div className="conteudo">
-                    <div className="cont">    
-                        {/* Your other content */}
-                    </div>
-                    {searchResults.map(result => (
-                        result.name.toLowerCase() === "eevee" ? (
-                            <EeveeComponent
-                                key={result.name}
-                                name={result.name}
-                                image={result.image}
-                                typeNames={result.typeNames}
-                                pokemonId={result.pokemonId}
-                                evolutionImages={evolutionImages}
-                                evolutionData={result.evolutionData} // Pass the evolutionData here if needed
-                            />
-                        ) : (
-                            <OtherPokemonComponent
-                                key={result.name}
-                                name={result.name}
-                                image={result.image}
-                                typeNames={result.typeNames}
-                                pokemonId={result.pokemonId}
-                                evolutionImages={evolutionImages}
-                            />
-                        )
+        <div className={`modulos1 ${typeNames[0]}`} key={name}>
+            <div className={`modulo1 ${typeNames[0]}`}>
+                <h4 className="th4">{formatName(name)}</h4>
+                <img className="img" src={image} alt={name} />
+                <div className="tipos">
+                    {typeNames.map((type, index) => (
+                        <span key={type} className={`tipo ${getTypeStyle(type)}`}>
+                            {formatType(type)}
+                        </span>
                     ))}
                 </div>
-            </main>
-            <footer className="rodape">
-                {/* Footer content */}
-            </footer>
+                <span className="pokeid">#{pokemonId.toString().padStart(3, '0')}</span>
+                <div className="evolutioImagesContainer">
+                    <table className="evochain">
+                        <tbody>
+                            {evolutionImages.map((evolution, index) => (
+                                <tr key={index}>
+                                    <td className="pkmn">
+                                        <a href={`/pokedex-sv/${evolution.name}.shtml`}>
+                                            <img src={evolution.image} loading="lazy" alt={evolution.name} width="80" />
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <p>{evolution.trigger}</p>
+                                        {evolution.condition && <p>{evolution.condition}</p>}
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
     );
-}   
+};
 
-export default Result;
+export default EeveeComponent;

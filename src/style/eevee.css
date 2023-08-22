@@ -1,0 +1,33 @@
+.modulos1 {
+    display: inline-grid;
+    margin: 5px;
+}
+
+.modulo1 {
+    text-align: center;
+    width: 70rem;
+    height: 43rem;
+    margin-bottom: 20px;
+    border-radius: 5px;
+}
+
+.evochain {
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.evochain td {
+    padding: 8px;
+    border: 1px solid #ccc;
+    text-align: center;
+}
+
+.evochain .pkmn img {
+    display: block;
+    margin: 0 auto;
+}
+
+.evochain p {
+    margin: 5px 0;
+}
