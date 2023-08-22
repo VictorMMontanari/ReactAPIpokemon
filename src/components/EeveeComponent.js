@@ -15,7 +15,7 @@ const EeveeComponent = ({ name, image, typeNames, pokemonId }) => {
                 const urlParams = new URLSearchParams(window.location.search);
                 const id = urlParams.get("id");
                 setSearchTerm(id);
-    
+
                 const pokemonData = await pokemon(id);
                 setSearchResults([{
                     name: pokemonData.name,
@@ -27,7 +27,7 @@ const EeveeComponent = ({ name, image, typeNames, pokemonId }) => {
                 console.error(error);
             }
         };
-    
+
         fetchData();
     }, []);
 
@@ -37,7 +37,7 @@ const EeveeComponent = ({ name, image, typeNames, pokemonId }) => {
                 const pokemonData = await pokemon(searchTerm);
                 const speciesUrl = pokemonData.species.url;
                 const chainData = await evolutionChain(speciesUrl);
-    
+
                 const evolutions = [];
                 const extractEvolutions = (evolution) => {
                     const evolutionDetails = {
@@ -47,7 +47,7 @@ const EeveeComponent = ({ name, image, typeNames, pokemonId }) => {
                         item: null,
                         happiness: null
                     };
-                
+
                     if (evolution.evolution_details.length > 0) {
                         const evolutionDetailInfo = evolution.evolution_details[0];
                         if (evolutionDetailInfo.min_level !== undefined) {
@@ -64,29 +64,29 @@ const EeveeComponent = ({ name, image, typeNames, pokemonId }) => {
                             evolutionDetails.happiness = evolutionDetailInfo.min_happiness;
                         }
                     }
-                
+
                     if (evolution.species.url) { // Check if species URL is defined
                         evolutionDetails.image = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${evolution.species.url.split("/")[6]}.png`;
                     }
-                
+
                     evolutions.push(evolutionDetails);
-                
+
                     if (evolution.evolves_to.length > 0) {
                         evolution.evolves_to.forEach((subEvolution) => {
                             extractEvolutions(subEvolution);
                         });
                     }
                 };
-                
-    
+
+
                 extractEvolutions(chainData.chain);
-    
+
                 setEvolutionImages(evolutions);
             } catch (error) {
                 console.error(error);
             }
         };
-    
+
         fetchData();
     }, [searchTerm]);
 
@@ -106,19 +106,34 @@ const EeveeComponent = ({ name, image, typeNames, pokemonId }) => {
                 <div className="evolutioImagesContainer">
                     <table className="evochain">
                         <tbody>
+                            <tr>
                             {evolutionImages.map((evolution, index) => (
-                                <tr key={index}>
-                                    <td className="pkmn">
-                                        <a href={`/pokedex-sv/${evolution.name}.shtml`}>
-                                            <img src={evolution.image} loading="lazy" alt={evolution.name} width="80" />
-                                        </a>
-                                    </td>
-                                    <td>
-                                        <p>{evolution.trigger}</p>
-                                        {evolution.condition && <p>{evolution.condition}</p>}
-                                    </td>
-                                </tr>
-                            ))}
+                                    <React.Fragment key={index}>
+                                        <td>
+                                            {evolution.level !== null && <p>Level: {evolution.level}</p>}
+                                            {evolution.item !== null && (
+                                                <div>
+                                                    <p>Item: {evolution.item.name}</p>
+                                                    <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/${evolution.item.name}.png`} alt={evolution.item.name} />
+                                                </div>
+                                            )}
+                                            {evolution.happiness !== null && <p>Happiness: {evolution.happiness}</p>}
+                                        </td>
+                                    </React.Fragment>
+                                ))}
+                            </tr>
+                            <tr>
+                                {evolutionImages.map((evolution, index) => (
+                                    <React.Fragment key={index}>
+                                            <td className="pkmn">
+                                                <div className={`${evolution.name}`}>
+                                                    <h4>{formatName(evolution.name)}</h4>
+                                                    <img src={evolution.image} loading="lazy" alt={evolution.name} width="80" />
+                                                </div>
+                                            </td>
+                                    </React.Fragment>
+                                ))}
+                            </tr>
                         </tbody>
                     </table>
                 </div>
