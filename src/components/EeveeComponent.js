@@ -48,8 +48,8 @@ const EeveeComponent = ({ name, image, typeNames, pokemonId }) => {
                         happiness: null
                     };
 
-                    if (evolution.evolution_details.length > 0) {
-                        const evolutionDetailInfo = evolution.evolution_details[0];
+                    for (let i = 0; i < evolution.evolution_details.length; i++) {
+                        const evolutionDetailInfo = evolution.evolution_details[i];
                         if (evolutionDetailInfo.min_level !== undefined) {
                             evolutionDetails.level = evolutionDetailInfo.min_level;
                         }
@@ -64,7 +64,6 @@ const EeveeComponent = ({ name, image, typeNames, pokemonId }) => {
                             evolutionDetails.happiness = evolutionDetailInfo.min_happiness;
                         }
                     }
-
                     if (evolution.species.url) { // Check if species URL is defined
                         evolutionDetails.image = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${evolution.species.url.split("/")[6]}.png`;
                     }
@@ -77,10 +76,7 @@ const EeveeComponent = ({ name, image, typeNames, pokemonId }) => {
                         });
                     }
                 };
-
-
                 extractEvolutions(chainData.chain);
-
                 setEvolutionImages(evolutions);
             } catch (error) {
                 console.error(error);
@@ -107,7 +103,22 @@ const EeveeComponent = ({ name, image, typeNames, pokemonId }) => {
                     <table className="evochain">
                         <tbody>
                             <tr>
-                            {evolutionImages.map((evolution, index) => (
+                                {evolutionImages.length > 0 && (
+                                    <td colSpan="8" align="center" className="pkmn">
+                                        <div className={`${evolutionImages[0].name}`}>
+                                            <h4>{formatName(evolutionImages[0].name)}</h4>
+                                            <img
+                                                src={evolutionImages[0].image}
+                                                loading="lazy"
+                                                alt={evolutionImages[0].name}
+                                                width="80"
+                                            />
+                                        </div>
+                                    </td>
+                                )}
+                            </tr>
+                            <tr>
+                                {evolutionImages.slice(1).map((evolution, index) => (
                                     <React.Fragment key={index}>
                                         <td>
                                             {evolution.level !== null && <p>Level: {evolution.level}</p>}
@@ -123,14 +134,14 @@ const EeveeComponent = ({ name, image, typeNames, pokemonId }) => {
                                 ))}
                             </tr>
                             <tr>
-                                {evolutionImages.map((evolution, index) => (
+                                {evolutionImages.slice(1).map((evolution, index) => (
                                     <React.Fragment key={index}>
-                                            <td className="pkmn">
-                                                <div className={`${evolution.name}`}>
-                                                    <h4>{formatName(evolution.name)}</h4>
-                                                    <img src={evolution.image} loading="lazy" alt={evolution.name} width="80" />
-                                                </div>
-                                            </td>
+                                        <td className="pkmn">
+                                            <div className="subevolution">
+                                                <h4>{formatName(evolution.name)}</h4>
+                                                <img src={evolution.image} loading="lazy" alt={evolution.name} width="80" />
+                                            </div>
+                                        </td>
                                     </React.Fragment>
                                 ))}
                             </tr>
