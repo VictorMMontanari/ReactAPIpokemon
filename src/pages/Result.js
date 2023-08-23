@@ -9,6 +9,7 @@ function Result() {
     const [searchTerm, setSearchTerm] = useState('');
     const [searchResults, setSearchResults] = useState([]);
     const [evolutionImages, setEvolutionImages] = useState([]);
+    const eeveeEvolutions = ["eevee", "vaporeon", "jolteon", "flareon", "espeon", "umbreon", "leafeon", "glaceon", "sylveon"];
 
     useEffect(() => {
         const fetchData = async () => {
@@ -49,8 +50,8 @@ function Result() {
                         happiness: null
                     };
                 
-                    if (evolution.evolution_details.length > 0) {
-                        const evolutionDetailInfo = evolution.evolution_details[0];
+                    for (let i = 0; i < evolution.evolution_details.length; i++) {
+                        const evolutionDetailInfo = evolution.evolution_details[i];
                         if (evolutionDetailInfo.min_level !== undefined) {
                             evolutionDetails.level = evolutionDetailInfo.min_level;
                         }
@@ -106,7 +107,7 @@ function Result() {
                         {/* Your other content */}
                     </div>
                     {searchResults.map(result => (
-                        result.name.toLowerCase() === "eevee" ? (
+                        eeveeEvolutions.includes(result.name.toLowerCase()) ?(
                             <EeveeComponent
                                 key={result.name}
                                 name={result.name}
