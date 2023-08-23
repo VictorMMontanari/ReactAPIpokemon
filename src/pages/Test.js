@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "../style/result.css";
 import { useApi } from '../hooks/useApi';
 import { formatName, getTypeStyle, formatType } from "../components/format";
-import EeveeComponent from "../components/EeveeComponent1";
+import EeveeComponent from "../components/EeveeComponent";
 import OtherPokemonComponent from "../components/OtherPokemonComponent";
 
 function Result() {

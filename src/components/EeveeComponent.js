@@ -124,7 +124,7 @@ const EeveeComponent = ({ name, image, typeNames, pokemonId }) => {
                                             {evolution.level !== null && <p>Level: {evolution.level}</p>}
                                             {evolution.item !== null && (
                                                 <div>
-                                                    <p>Item: {evolution.item.name}</p>
+                                                    <p>{formatName(evolution.item.name)}</p>
                                                     <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/${evolution.item.name}.png`} alt={evolution.item.name} />
                                                 </div>
                                             )}
@@ -139,7 +139,9 @@ const EeveeComponent = ({ name, image, typeNames, pokemonId }) => {
                                         <td className="pkmn">
                                             <div className="subevolution">
                                                 <h4>{formatName(evolution.name)}</h4>
-                                                <img src={evolution.image} loading="lazy" alt={evolution.name} width="80" />
+                                                <a href={`/result?id=${evolution.name}`}>
+                                                    <img src={evolution.image} loading="lazy" alt={evolution.name} width="80" />
+                                                </a>   
                                             </div>
                                         </td>
                                     </React.Fragment>
