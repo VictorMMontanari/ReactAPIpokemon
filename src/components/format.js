@@ -1,3 +1,5 @@
+import { espeon, sylveon, umbreon } from "../icon";
+
 function formatName(inputName) {
     const parts = inputName.split('-');
   
@@ -53,4 +55,30 @@ const formatType = (typeName) => {
     return typeNames[typeName.toLowerCase()] || typeName;
 };
 
-export { formatName, getTypeClass, getTypeNames, getTypeStyle, formatType };
+export function getImageAndAltForEvolution(evolutionName) {
+    switch (evolutionName) {
+      case 'espeon':
+        return {
+          image: espeon,
+          alt: 'Level Up with Happiness Value at 160 During the Day'
+        };
+      case 'sylveon':
+        return {
+          image: sylveon,
+          alt: 'Level Up with Friendship and Know a Fairy-Type Move'
+        };
+      case 'umbreon':
+        return {
+          image: umbreon,
+          alt: 'Level Up with Happiness Value at 160 During the Night'
+        };
+      default:
+        return {
+          image: '',
+          alt: 'Unknown Evolution'
+        };
+    }
+  }
+
+
+export { formatName, getTypeClass, getTypeNames, getTypeStyle, formatType};

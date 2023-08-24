@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { formatName, getTypeStyle, formatType } from "./format";
 import "../style/eevee.css";
+import { getImageAndAltForEvolution } from "./format";
 import { useApi } from "../hooks/useApi";
 
 const EeveeComponent = ({ name, image, typeNames, pokemonId }) => {
@@ -87,9 +88,11 @@ const EeveeComponent = ({ name, image, typeNames, pokemonId }) => {
     }, [searchTerm]);
 
     return (
-        <div className={`modulos1 ${typeNames[0]}`} key={name}>
-            <div className={`modulo1 ${typeNames[0]}`}>
-                <h4 className="th4">{formatName(name)}</h4>
+        <div className={`moduloseevee`} key={name}>
+            <div className={`moduloeevee`}>
+                <div className="t4e">
+                    <h4 className="th4e">{formatName(name)}</h4>
+                </div> 
                 <img className="img" src={image} alt={name} />
                 <div className="tipos">
                     {typeNames.map((type, index) => (
@@ -106,13 +109,15 @@ const EeveeComponent = ({ name, image, typeNames, pokemonId }) => {
                                 {evolutionImages.length > 0 && (
                                     <td colSpan="8" align="center" className="pkmn">
                                         <div className={`${evolutionImages[0].name}`}>
-                                            <h4>{formatName(evolutionImages[0].name)}</h4>
-                                            <img
-                                                src={evolutionImages[0].image}
-                                                loading="lazy"
-                                                alt={evolutionImages[0].name}
-                                                width="80"
-                                            />
+                                            {/* <h4>{formatName(evolutionImages[0].name)}</h4> */}
+                                            <a href={`/result?id=${evolutionImages[0].name}`}>
+                                                <img
+                                                    src={evolutionImages[0].image}
+                                                    loading="lazy"
+                                                    alt={evolutionImages[0].name}
+                                                    width="80"
+                                                />
+                                            </a>
                                         </div>
                                     </td>
                                 )}
@@ -128,7 +133,15 @@ const EeveeComponent = ({ name, image, typeNames, pokemonId }) => {
                                                     <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/${evolution.item.name}.png`} alt={evolution.item.name} />
                                                 </div>
                                             )}
-                                            {evolution.happiness !== null && <p>Happiness: {evolution.happiness}</p>}
+                                            {evolution.happiness !== null && <div>
+                                                <p>Happiness</p>
+                                                <img
+                                                    src={getImageAndAltForEvolution(evolution.name).image}
+                                                    alt={getImageAndAltForEvolution(evolution.name).alt}
+                                                    title={getImageAndAltForEvolution(evolution.name).alt}
+                                                    loading="lazy"
+                                                />
+                                            </div>}
                                         </td>
                                     </React.Fragment>
                                 ))}
@@ -141,7 +154,7 @@ const EeveeComponent = ({ name, image, typeNames, pokemonId }) => {
                                                 <h4>{formatName(evolution.name)}</h4>
                                                 <a href={`/result?id=${evolution.name}`}>
                                                     <img src={evolution.image} loading="lazy" alt={evolution.name} width="80" />
-                                                </a>   
+                                                </a>
                                             </div>
                                         </td>
                                     </React.Fragment>
