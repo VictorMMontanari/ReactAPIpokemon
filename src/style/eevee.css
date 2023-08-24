@@ -1,26 +1,49 @@
-.modulos1 {
+.moduloseevee {
     display: inline-grid;
     margin: 5px;
 }
 
-.modulo1 {
+.moduloseevee {
     text-align: center;
-    width: 70rem;
+    width: auto;
     height: 43rem;
     margin-bottom: 20px;
     border-radius: 5px;
 }
 
+.t4e {
+    margin: 0px;
+    color: #fff;
+    font-weight: 300;
+    font-size: 1.5rem;
+    padding: 10px 20px;
+    background-color: #1867c0;
+}
+
+.th4e {
+    padding: 10px 0px 10px 0px;
+    margin: 0px;
+    color: #fff;
+    font-weight: 300;
+    font-size: 1.2rem;
+}
+
+.moduloseevee{background-color: #ffffff; border: 2px solid #000000;} 
+.moduloseevee .t4e { background-color: #000000;}
+
 .evochain {
     border-collapse: collapse;
     width: 100%;
     margin-top: 20px;
+    border-spacing: 0;
+    font-size: 0.9rem;
+    color: #000;
+    text-align: center;
+    font-weight: bold;
 }
 
 .evochain td {
     padding: 8px;
-    border: 1px solid #ccc;
-    text-align: center;
 }
 
 .evochain .pkmn img {
@@ -32,28 +55,17 @@
     margin: 5px 0;
 }
 
-.evochain {
-    font-size: 0.9em;
-    color: rgb(0, 0, 0);
-    text-align: center;
-    font-weight: bold;
-    border: 0;
-}
-
 .pkmn {
     font-size: 1em;
-    color: rgb(0, 0, 0);
+    color: #000;
 }
 
 .subevolution {
-    padding-right: 8px;
-    padding-left: 8px;
+    padding: 8px;
     background: #bdbbbb;
     text-align: center;
     border: 1px solid #383838;
-    padding-bottom: 8px;
-    -moz-border-radius: 30px;
-    -webkit-border-radius: 30px;
+    border-radius: 30px;
     width: 8rem;
 }
 
@@ -61,6 +73,7 @@
     background: #bdbbbb;
     text-align: center;
     border: 1px solid #383838;
+    padding: 10px 0px 10px 0px;
     border-radius: 30px;
     -moz-border-radius: 30px;
     -webkit-border-radius: 30px;
