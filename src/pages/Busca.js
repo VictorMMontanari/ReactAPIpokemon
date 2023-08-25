@@ -120,7 +120,7 @@ function Result() {
                                     <h4 className="th4">{formatName(result.name)}</h4>
                                 </div>
                                 <a href={`/result?id=${result.pokemonId}`}>
-                                    <img className="img" src={result.image} alt={result.name} />
+                                    <img className={`img ${result.typeClass}2`} src={result.image} alt={result.name} />
                                 </a>
                                 <div className="tipos">
                                     {result.typeNames.map((type, index) => (
