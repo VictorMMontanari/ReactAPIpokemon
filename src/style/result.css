@@ -149,8 +149,13 @@ body {
 .img {
     width: 100px;
     height: 100px;
-    margin: 10px; 
+    margin: 10px;
+    display: inline-block; /* Certifica-se de que o elemento se comporta como um bloco, mas permanece em linha */ 
+    box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.041); /* Define a sombra como um contorno */
+    border-radius: 5px; /* Adiciona bordas arredondadas ao contorno */
+    background-color: rgba(255, 255, 255, 0.238); 
   }
+
 
 .cont {
     display: block;
@@ -168,6 +173,7 @@ body {
     display: inline-block;
     font-size: 16px;
     border-radius: 5px;
+    width: 8rem;
   }
 
 .modulo.undefined{background-color: #ffffff; border: 2px solid #000000;} 
@@ -182,14 +188,10 @@ body {
 .modulo.elect > .t4 { background-color: #332d1f; border-radius: 5px;}
 .modulo.fhgt{background-color: #bb0505; border: 2px solid #bb0505;} 
 .modulo.fhgt > .t4 { background-color: #080505b8; border-radius: 5px;}
-.modulo.fire{background-color: #ff7300; border: 2px solid #ff7300;} 
-.modulo.fire > .t4 { background-color: #080505b8; border-radius: 5px;}
 .modulo.flying{background-color: #54b8c5; border: 2px solid #54b8c5;}
 .modulo.flying > .t4 { background-color: #1867c0; border-radius: 5px;}
 .modulo.ghost{background-color: #470e75; border: 2px solid #470e75;}
 .modulo.ghost > .t4 { background-color: #3116c9c2; border-radius: 5px;}
-.modulo.grass{background-color: #03e60b; border: 2px solid #03e60b;} 
-.modulo.grass > .t4 { background-color: #156a00c2; border-radius: 5px;}
 .modulo.ground{background-color: #b3a52a; border: 2px solid #b3a52a;} 
 .modulo.ground > .t4 { background-color: #837818; border-radius: 5px;}
 .modulo.ice{background-color: #00e1ff; border: 2px solid #00e1ff;}
@@ -204,8 +206,50 @@ body {
 .modulo.rock > .t4 { background-color: #917702; border-radius: 5px;}
 .modulo.steel{background-color: #baccce; border: 2px solid #baccce;}
 .modulo.steel > .t4 { background-color: #8b9799; border-radius: 5px;}
-.modulo.water{background-color: #008cff; border: 2px solid #008cff;}
-.modulo.water > .t4 { background-color: #1867c0; border-radius: 5px;}
+
+.modulo.ghost{background-color: #470e7571; border: 2px solirgba(71, 14, 117, 0.392)75;}
+.modulo.ghost > .t4 { background-color: #6916c9c2; border-radius: 5px;}
+.modulos.ghost {
+    background-image: url('../icon/ghost.jpg');
+    background-size: cover;
+    height: 17.22rem;
+    border: 2px solid #0000003f;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.modulo.fire{background-color: #ffffff58; border: 2px solid #ff73001f;} 
+.modulo.fire > .t4 { background-color: #c65d086d; border-radius: 5px;}
+.modulos.fire {
+    background-image: url('../icon/fire.jpg');
+    background-size: cover;
+    height: 17.22rem;
+    border: 2px solid #0000003f;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.modulo.grass{background-color: #ffffff58; border: 2px solid #03e60b17;} 
+.modulo.grass > .t4 { background-color: #156a0078; border-radius: 5px;}
+.modulos.grass {
+    background-image: url('../icon/grass.jpg');
+    background-size: cover;
+    height: 17.22rem;
+    border: 2px solid #0000003f;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.modulo.water{background-color: #ffffff58; border: 2px solid #008cff88;}
+.modulo.water > .t4 { background-color: #008cff88; border-radius: 5px;}
+.modulos.water {
+    background-image: url('../icon/whater.jpg');
+    background-size: cover;
+    height: 17.22rem;
+    border: 2px solid #0000003f;
+    border-radius: 5px;
+    font-weight: bold;
+}
 
 .tipo.bug{background-color: #4b9b4e; border: 2px solid ;} 
 .tipo.dark{background-color: #4e493c; border: 2px solid ;} 
