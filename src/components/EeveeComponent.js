@@ -3,6 +3,8 @@ import { formatName, getTypeStyle, formatType } from "./format";
 import "../style/eevee.css";
 import { getImageAndAltForEvolution } from "./format";
 import { useApi } from "../hooks/useApi";
+import VerticalProgressBar from "../components/VerticalProgressBar";
+import PokemonWeaknesses from "../components/PokemonWeaknesses";
 
 const EeveeComponent = ({ name, image, typeNames, pokemonId }) => {
     const { pokemon, evolutionChain } = useApi();
@@ -22,7 +24,8 @@ const EeveeComponent = ({ name, image, typeNames, pokemonId }) => {
                     name: pokemonData.name,
                     image: pokemonData.sprites.other["official-artwork"].front_default,
                     pokemonId: pokemonData.id,
-                    typeNames: pokemonData.types.map(typeInfo => typeInfo.type.name)
+                    typeNames: pokemonData.types.map(typeInfo => typeInfo.type.name),
+                    stats: pokemonData.stats,
                 }]);
             } catch (error) {
                 console.error(error);
@@ -92,7 +95,7 @@ const EeveeComponent = ({ name, image, typeNames, pokemonId }) => {
             <div className={`moduloeevee`}>
                 <div className="t4e">
                     <h4 className="th4e">{formatName(name)}</h4>
-                </div> 
+                </div>
                 <img className="img" src={image} alt={name} />
                 <div className="tipos">
                     {typeNames.map((type, index) => (
@@ -163,6 +166,32 @@ const EeveeComponent = ({ name, image, typeNames, pokemonId }) => {
                         </tbody>
                     </table>
                 </div>
+                <table className="tabStats">
+                    <tbody>
+                        <tr className="trStatsEx">
+                            <td className="tdStats">
+                                <div className="stats">
+                                    {searchResults.map(result => (
+                                        <VerticalProgressBar
+                                            key={result.pokemonId}
+                                            stats={result.stats} // Pass the stats data to the VerticalProgressBar
+                                        />
+                                    ))}
+                                </div>
+                            </td>
+                            <tr className="trStats">
+                                <td className="tdStats">
+                                    {searchResults.map(result => (
+                                        <PokemonWeaknesses
+                                            key={result.pokemonId}
+                                            pokemonName={result.name}
+                                        />
+                                    ))}
+                                </td>
+                            </tr>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     );

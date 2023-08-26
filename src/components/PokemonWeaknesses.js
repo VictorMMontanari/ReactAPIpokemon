@@ -55,12 +55,5 @@ function PokemonWeaknesses({ pokemonName }) {
     );
 }
 
-function App() {
-    return (
-        <div>
-            <PokemonWeaknesses pokemonName="bulbasaur" />
-        </div>
-    );
-}
 
-export default App;
+export default PokemonWeaknesses;

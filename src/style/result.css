@@ -314,3 +314,31 @@ body {
 .evolution-image {
     margin: 0 10px; /* Ajuste as margens conforme necessário para o espaçamento */
 }
+
+/* ----- Weaknesses ------- */
+
+.ulTipo {
+    display: flex;
+    list-style-type: none;
+    margin: 0;
+    padding: 3px 0px 3px 3px;
+    overflow: hidden;
+}
+
+.liTipo > .tipo {
+    display: block;
+    text-align: center;
+    padding: 5px 5px;
+    width: 5rem;
+    text-decoration: none;
+}
+
+.liTipo {
+    cursor: pointer;
+    margin: 0 3px; /* Ajuste a margem conforme necessário */
+    transition: transform 0.1s ease; /* Adiciona uma transição suave */
+}
+
+.liTipo:hover {
+    transform: scale(1.1); /* Aumenta ligeiramente o tamanho ao passar o mouse */
+}
