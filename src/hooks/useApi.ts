@@ -30,5 +30,5 @@ export const useApi = () => ({
         } catch (error) {
             throw error;
         }
-    }
+    },
 });

@@ -4,6 +4,7 @@ import { useApi } from '../hooks/useApi';
 import EeveeComponent from "../components/EeveeComponent";
 import OtherPokemonComponent from "../components/OtherPokemonComponent";
 
+
 function Result() {
     const { pokemon, evolutionChain } = useApi();
     const [searchTerm, setSearchTerm] = useState('');
@@ -17,19 +18,20 @@ function Result() {
                 const urlParams = new URLSearchParams(window.location.search);
                 const id = urlParams.get("id");
                 setSearchTerm(id);
-    
+
                 const pokemonData = await pokemon(id);
                 setSearchResults([{
                     name: pokemonData.name,
                     image: pokemonData.sprites.other["official-artwork"].front_default,
                     pokemonId: pokemonData.id,
-                    typeNames: pokemonData.types.map(typeInfo => typeInfo.type.name)
+                    typeNames: pokemonData.types.map(typeInfo => typeInfo.type.name),
+                    stats: pokemonData.stats,
                 }]);
             } catch (error) {
                 console.error(error);
             }
         };
-    
+
         fetchData();
     }, []);
 
@@ -39,7 +41,7 @@ function Result() {
                 const pokemonData = await pokemon(searchTerm);
                 const speciesUrl = pokemonData.species.url;
                 const chainData = await evolutionChain(speciesUrl);
-    
+
                 const evolutions = [];
                 const extractEvolutions = (evolution) => {
                     const evolutionDetails = {
@@ -49,7 +51,7 @@ function Result() {
                         item: null,
                         happiness: null
                     };
-                
+
                     for (let i = 0; i < evolution.evolution_details.length; i++) {
                         const evolutionDetailInfo = evolution.evolution_details[i];
                         if (evolutionDetailInfo.min_level !== undefined) {
@@ -66,29 +68,29 @@ function Result() {
                             evolutionDetails.happiness = evolutionDetailInfo.min_happiness;
                         }
                     }
-                
+
                     if (evolution.species.url) { // Check if species URL is defined
                         evolutionDetails.image = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${evolution.species.url.split("/")[6]}.png`;
                     }
-                
+
                     evolutions.push(evolutionDetails);
-                
+
                     if (evolution.evolves_to.length > 0) {
                         evolution.evolves_to.forEach((subEvolution) => {
                             extractEvolutions(subEvolution);
                         });
                     }
                 };
-                
-    
+
+
                 extractEvolutions(chainData.chain);
-    
+
                 setEvolutionImages(evolutions);
             } catch (error) {
                 console.error(error);
             }
         };
-    
+
         fetchData();
     }, [searchTerm]);
 
@@ -96,18 +98,18 @@ function Result() {
         <div>
             <header className="cabecalho">
                 <div className='acertar'>
-                    <div className="input-group mb-3">  
+                    <div className="input-group mb-3">
                         <h1>PokeAPI</h1>
                     </div>
                 </div>
             </header>
             <main className="principal">
                 <div className="conteudo">
-                    <div className="cont">    
+                    <div className="cont">
                         {/* Your other content */}
                     </div>
                     {searchResults.map(result => (
-                        eeveeEvolutions.includes(result.name.toLowerCase()) ?(
+                        eeveeEvolutions.includes(result.name.toLowerCase()) ? (
                             <EeveeComponent
                                 key={result.name}
                                 name={result.name}
@@ -135,6 +137,6 @@ function Result() {
             </footer>
         </div>
     );
-}   
+}
 
 export default Result;

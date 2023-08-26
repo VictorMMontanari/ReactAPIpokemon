@@ -6,9 +6,12 @@
 .moduloseevee {
     text-align: center;
     width: auto;
-    height: 43rem;
     margin-bottom: 20px;
     border-radius: 5px;
+}
+
+.stats{
+    padding: 10px;
 }
 
 .t4e {
@@ -77,4 +80,15 @@
     border-radius: 30px;
     -moz-border-radius: 30px;
     -webkit-border-radius: 30px;
+}
+
+.tabStats {
+    border: 1px solid rgb(144, 144, 144);
+}
+.trStatsEx {
+    display: flex;
+    width: auto;
+    border: 2px solid black;
+    border-radius: 7px;
+    background-color: rgb(189 187 187);
 }
