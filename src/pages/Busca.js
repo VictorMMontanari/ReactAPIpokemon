@@ -68,7 +68,7 @@ function Result() {
     return (
         <div>
             <header className="cabecalho">
-                <h1>PokeAPI</h1>
+                <h1 className="logo">PokeAPI</h1>
                 <div className='acertar'>
                     <div className="input-group mb-3">
                         <input
