@@ -99,7 +99,9 @@ function Result() {
             <header className="cabecalho">
                 <div className='acertar'>
                     <div className="input-group mb-3">
-                        <h1>PokeAPI</h1>
+                        <a>
+                            <h1 className="logo">PokeAPI</h1>
+                        </a>
                     </div>
                 </div>
             </header>

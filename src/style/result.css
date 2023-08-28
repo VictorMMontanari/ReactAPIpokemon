@@ -24,6 +24,7 @@ body {
     justify-content: center;
     align-items: center;
     padding-bottom: 10px;
+    padding-top: 10px;
     z-index: 1;
     box-shadow: 0px 4px 9px -2px rgba(0, 0, 0, 0.75);
 }
@@ -617,6 +618,8 @@ body {
 
 .ulTipo {
     display: flex;
+    flex-wrap: wrap;
+    width: 18rem;
     list-style-type: none;
     margin: 0;
     padding: 3px 0px 3px 3px;
@@ -632,6 +635,7 @@ body {
 }
 
 .liTipo {
+    padding-bottom: 10px;
     cursor: pointer;
     margin: 0 3px;
     /* Ajuste a margem conforme necessário */
@@ -712,3 +716,6 @@ body {
     align-items: center;
 }
 
+/* tr td {
+    border: 1px solid black;
+} */

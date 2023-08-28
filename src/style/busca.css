@@ -77,3 +77,10 @@ body {
     border-style: solid;
     margin: 5px 30rem 5px 30rem;
   }
+
+  .logo {
+    font-family: 'Pokemon Solid', sans-serif;
+    color: rgb(0, 0, 0);
+    font-size: 3rem;
+    text-shadow: 1px 1px 0px #ffffff, -1px -1px 0px #ffffff, 1px -1px 0px #ffffff, -1px 1px 0px #ffffff;
+  }
