@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "../style/result.css";
 import '../style/busca.css';
 import { useApi } from '../hooks/useApi';
-import {formatName, getTypeClass, getTypeNames, getTypeStyle, formatType} from "../components/format";
-/* import DynamicSearch from "../components/DynamicSearch"; */
+import { formatName, getTypeClass, getTypeStyle, formatType } from "../components/format";
 
 
 function Result() {
@@ -16,10 +15,10 @@ function Result() {
             setSearchResults([]);
             return;
         }
-    
+
         try {
             const results = await pokemon(searchTerm);
-    
+
             if (results) {
                 setSearchResults([{
                     name: results.name,
@@ -73,7 +72,7 @@ function Result() {
                 <h1 className="logo">PokeAPI</h1>
                 <div className='acertar'>
                     <div className="input-group mb-3">
-                        {/* <DynamicSearch results={searchResults} setSearchResults={setSearchResults} /> */}
+
                         <input
                             type="text"
                             className="form-control"
@@ -114,7 +113,7 @@ function Result() {
                         <button type="button" class="button psychic" onClick={() => handleSearchType(14)}>Psychic</button>
                         <button type="button" class="button rock" onClick={() => handleSearchType(6)}>Rock</button>
                         <button type="button" class="button steel" onClick={() => handleSearchType(9)}>Steel</button>
-                        <button type="button" class="button water" onClick={() => handleSearchType(11)}>Water</button> 
+                        <button type="button" class="button water" onClick={() => handleSearchType(11)}>Water</button>
                     </div>
                     {searchResults.map(result => (
                         <nav className={`modulos ${result.typeClass}`} key={result.name}>
