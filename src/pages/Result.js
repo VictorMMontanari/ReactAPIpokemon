@@ -99,7 +99,7 @@ function Result() {
             <header className="cabecalho">
                 <div className='acertar'>
                     <div className="input-group mb-3">
-                        <a>
+                        <a href="/">
                             <h1 className="logo">PokeAPI</h1>
                         </a>
                     </div>
@@ -126,10 +126,13 @@ function Result() {
                                 key={result.name}
                                 name={result.name}
                                 image={result.image}
+                                stats={result.stats}
                                 typeNames={result.typeNames}
                                 pokemonId={result.pokemonId}
                                 evolutionImages={evolutionImages}
+                                searchResults={searchResults}  // Pass the entire searchResults array
                             />
+
                         )
                     ))}
                 </div>

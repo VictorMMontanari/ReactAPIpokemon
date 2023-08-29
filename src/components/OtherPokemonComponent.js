@@ -1,9 +1,13 @@
 import React from "react";
 import { formatName, getTypeStyle, formatType } from "../components/format";
 import happinessImage from '../icon/happiness.png';
+import VerticalProgressBar from "../components/VerticalProgressBar";
+import PokemonWeaknesses from "../components/PokemonWeaknesses";
+import { useState } from "react";
 
-const OtherPokemonComponent = ({ name, image, typeNames, pokemonId, evolutionImages }) => (
-    <div className={`moduloseevee`} key={name}>
+const OtherPokemonComponent = ({ name, image, typeNames, pokemonId, evolutionImages, searchResults}) => {
+    return (
+        <div className={`moduloseevee`} key={name}>
         <div className={`moduloeevee`}>
             <div className="t4e">
                 <h4 className="th4e">{formatName(name)}</h4>
@@ -21,7 +25,7 @@ const OtherPokemonComponent = ({ name, image, typeNames, pokemonId, evolutionIma
                 <table>
                     <tbody>
                         <tr>
-                        {evolutionImages.map((evolution, index) => (
+                            {evolutionImages.map((evolution, index) => (
                                 <React.Fragment key={index}>
                                     {evolution.level !== null && (
                                         <td>
@@ -64,7 +68,7 @@ const OtherPokemonComponent = ({ name, image, typeNames, pokemonId, evolutionIma
                                     {evolution.happiness !== null && (
                                         <td className="">
                                             <div className="hap-container">
-                                                <img src={happinessImage}/>
+                                                <img src={happinessImage} />
                                                 {/* <h4 className="LvPk">{evolution.happiness}</h4> */}
                                             </div>
                                         </td>
@@ -79,8 +83,35 @@ const OtherPokemonComponent = ({ name, image, typeNames, pokemonId, evolutionIma
                     </tbody>
                 </table>
             </div>
+            <table className="tabStats">
+    <tbody>
+        <tr className="trStatsEx">
+            <td className="tdStats">
+                <div className="stats">
+                    {searchResults.map(result => (
+                        <VerticalProgressBar
+                            key={result.pokemonId}
+                            stats={result.stats} // Pass the stats data to the VerticalProgressBar
+                        />
+                    ))}
+                </div>
+            </td>
+        </tr>
+        <tr className="trStats">
+            <td className="tdStats">
+                {searchResults.map(result => (
+                    <PokemonWeaknesses
+                        key={result.pokemonId}
+                        pokemonName={result.name}
+                    />
+                ))}
+            </td>
+        </tr>
+    </tbody>
+</table>
         </div>
     </div>
-);
+    ); 
+};
 
 export default OtherPokemonComponent;
