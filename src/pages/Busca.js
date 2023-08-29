@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../style/result.css";
 import '../style/busca.css';
 import { useApi } from '../hooks/useApi';
 import {formatName, getTypeClass, getTypeNames, getTypeStyle, formatType} from "../components/format";
+/* import DynamicSearch from "../components/DynamicSearch"; */
+
 
 function Result() {
     const [searchTerm, setSearchTerm] = useState('');
@@ -71,6 +73,7 @@ function Result() {
                 <h1 className="logo">PokeAPI</h1>
                 <div className='acertar'>
                     <div className="input-group mb-3">
+                        {/* <DynamicSearch results={searchResults} setSearchResults={setSearchResults} /> */}
                         <input
                             type="text"
                             className="form-control"
@@ -95,23 +98,23 @@ function Result() {
             <main className="principal">
                 <div className="conteudo">
                     <div className="cont">
-                        <button className="button bug" onClick={() => handleSearchType(7)}>Bug</button>
-                        <button class="button dark" onClick={() => handleSearchType(17)}>Dark</button>
-                        <button class="button drag" onClick={() => handleSearchType(16)}>Dragon</button>
-                        <button class="button elect" onClick={() => handleSearchType(13)}>Electric</button>
-                        <button class="button fhgt" onClick={() => handleSearchType(2)}>Fight</button>
-                        <button class="button fire" onClick={() => handleSearchType(10)}>Fire</button>
-                        <button class="button flying" onClick={() => handleSearchType(3)}>Flying</button>
-                        <button class="button ghost" onClick={() => handleSearchType(8)}>Ghost</button>
-                        <button class="button grass" onClick={() => handleSearchType(12)}>Grass</button>
-                        <button class="button ground" onClick={() => handleSearchType(5)}>Ground</button>
-                        <button class="button ice" onClick={() => handleSearchType(15)}>Ice</button>
-                        <button class="button normal" onClick={() => handleSearchType(1)}>Normal</button>
-                        <button class="button poison" onClick={() => handleSearchType(4)}>Poison</button>
-                        <button class="button psychic" onClick={() => handleSearchType(14)}>Psychic</button>
-                        <button class="button rock" onClick={() => handleSearchType(6)}>Rock</button>
-                        <button class="button steel" onClick={() => handleSearchType(9)}>Steel</button>
-                        <button class="button water" onClick={() => handleSearchType(11)}>Water</button> 
+                        <button type="button" className="button bug" onClick={() => handleSearchType(7)}>Bug</button>
+                        <button type="button" class="button dark" onClick={() => handleSearchType(17)}>Dark</button>
+                        <button type="button" class="button drag" onClick={() => handleSearchType(16)}>Dragon</button>
+                        <button type="button" class="button elect" onClick={() => handleSearchType(13)}>Electric</button>
+                        <button type="button" class="button fhgt" onClick={() => handleSearchType(2)}>Fight</button>
+                        <button type="button" class="button fire" onClick={() => handleSearchType(10)}>Fire</button>
+                        <button type="button" class="button flying" onClick={() => handleSearchType(3)}>Flying</button>
+                        <button type="button" class="button ghost" onClick={() => handleSearchType(8)}>Ghost</button>
+                        <button type="button" class="button grass" onClick={() => handleSearchType(12)}>Grass</button>
+                        <button type="button" class="button ground" onClick={() => handleSearchType(5)}>Ground</button>
+                        <button type="button" class="button ice" onClick={() => handleSearchType(15)}>Ice</button>
+                        <button type="button" class="button normal" onClick={() => handleSearchType(1)}>Normal</button>
+                        <button type="button" class="button poison" onClick={() => handleSearchType(4)}>Poison</button>
+                        <button type="button" class="button psychic" onClick={() => handleSearchType(14)}>Psychic</button>
+                        <button type="button" class="button rock" onClick={() => handleSearchType(6)}>Rock</button>
+                        <button type="button" class="button steel" onClick={() => handleSearchType(9)}>Steel</button>
+                        <button type="button" class="button water" onClick={() => handleSearchType(11)}>Water</button> 
                     </div>
                     {searchResults.map(result => (
                         <nav className={`modulos ${result.typeClass}`} key={result.name}>
