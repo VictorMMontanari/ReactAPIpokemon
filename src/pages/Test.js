@@ -1,7 +1,11 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import Autosuggest from 'react-autosuggest';
-import '../style/App.css'; // Certifique-se de ter o caminho correto para o arquivo CSS de estilização
+import Autocomplete, { createFilterOptions } from '@mui/material/Autocomplete';
+import TextField from '@mui/material/TextField';
+import '../style/App.css';
+import '../style/busca.css';
+
+const filter = createFilterOptions();
 
 const SearchBar = ({ onSearch }) => {
   const [value, setValue] = useState('');
@@ -18,11 +22,16 @@ const SearchBar = ({ onSearch }) => {
 
     try {
       const response = await axios.get(`https://pokeapi.co/api/v2/pokemon/?limit=1050`);
-      const pokemonNames = response.data.results.map((pokemon) => pokemon.name);
-      const filteredSuggestions = pokemonNames.filter((name) =>
-        name.includes(searchTerm.toLowerCase())
-      );
-      setSuggestions(filteredSuggestions.slice(0, 5));
+
+      if (response.data.results && Array.isArray(response.data.results)) {
+        const pokemonNames = response.data.results.map((pokemon) => pokemon.name);
+        const filteredSuggestions = pokemonNames.filter((name) =>
+          name.includes(searchTerm.toLowerCase())
+        );
+        setSuggestions(filteredSuggestions.slice(0, 5));
+      } else {
+        setSuggestions([]);
+      }
     } catch (error) {
       console.error(error);
     }
@@ -30,42 +39,62 @@ const SearchBar = ({ onSearch }) => {
     setIsLoading(false);
   };
 
-  const handleChange = (event, { newValue }) => {
+  const handleChange = (event, newValue) => {
     setValue(newValue);
     fetchSuggestions(newValue);
   };
 
-  const handleSuggestionSelected = (_, { suggestion }) => {
-    setValue(suggestion);
-  };
-
-  const inputProps = {
-    placeholder: 'Search for a Pokémon',
-    value,
-    onChange: handleChange,
+  const handleSearch = () => {
+    onSearch(value);
   };
 
   return (
     <div className="search-bar">
-      <Autosuggest
-        suggestions={suggestions}
-        onSuggestionsFetchRequested={({ value }) => fetchSuggestions(value)}
-        onSuggestionsClearRequested={() => setSuggestions([])}
-        onSuggestionSelected={handleSuggestionSelected}
-        getSuggestionValue={(suggestion) => suggestion}
-        renderSuggestion={(suggestion) => <div>{suggestion}</div>}
-        inputProps={inputProps}
+      <Autocomplete
+        value={value}
+        className="form-control" //verificar
+        onChange={(event, newValue) => {
+          setValue(newValue);
+        }}
+        options={suggestions}
+        filterOptions={(options, params) => {
+          const filtered = filter(options, params);
+
+          const { inputValue } = params;
+          const isExisting = options.some((option) => inputValue === option.title);
+          if (inputValue !== '' && !isExisting) {
+            filtered.push({
+              inputValue,
+              title: inputValue,
+            });
+          }
+
+          return filtered;
+        }}
+     
+
+
+        getOptionLabel={(option) => option.title || option}
+        freeSolo
+        renderInput={(params) => (
+          <TextField
+            {...params}
+            label="Search for a Pokémon"
+            className="form-control" //verificar
+            onChange={(e) => handleChange(e, e.target.value)}
+          />
+        )}
       />
       {isLoading && <div className="loading">Loading suggestions...</div>}
+      <button className="btn btn-outline-secondary" onClick={handleSearch}>Search</button>
     </div>
   );
 };
 
 function App() {
   const [selectedPokemon, setSelectedPokemon] = useState(null);
-  const [searchTerm, setSearchTerm] = useState('');
 
-  const handleSearch = async () => {
+  const handleSearch = async (searchTerm) => {
     if (!searchTerm) {
       setSelectedPokemon(null);
       return;
@@ -75,9 +104,15 @@ function App() {
       const response = await axios.get(
         `https://pokeapi.co/api/v2/pokemon/${searchTerm.toLowerCase()}`
       );
-      setSelectedPokemon(response.data);
+
+      if (response.data) {
+        setSelectedPokemon(response.data);
+      } else {
+        console.error("No data found for the selected Pokémon.");
+        setSelectedPokemon(null);
+      }
     } catch (error) {
-      console.error(error);
+      console.error("Error while fetching Pokémon data:", error);
       setSelectedPokemon(null);
     }
   };
@@ -88,16 +123,9 @@ function App() {
       <SearchBar onSearch={handleSearch} />
       {selectedPokemon && (
         <div className="pokemon-details">
-          <h2>{selectedPokemon.name}</h2>
-          <img
-            src={selectedPokemon.sprites.front_default}
-            alt={selectedPokemon.name}
-          />
-          <p>Height: {selectedPokemon.height}</p>
-          <p>Weight: {selectedPokemon.weight}</p>
+          {selectedPokemon.name}
         </div>
       )}
-      <button onClick={handleSearch}>Search</button>
     </div>
   );
 }
