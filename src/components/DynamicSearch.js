@@ -1,49 +1,93 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from 'react';
+import axios from 'axios';
+import Autocomplete, { createFilterOptions } from '@mui/material/Autocomplete';
+import TextField from '@mui/material/TextField';
+import '../style/App.css';
 
-function DynamicSearch({ results, setSearchResults }) {
-    const [searchTerm, setSearchTerm] = useState("");
-    const [suggestions, setSuggestions] = useState([]);
+const filter = createFilterOptions();
 
+const SearchBar = ({ onSearch }) => {
+  const [value, setValue] = useState('');
+  const [suggestions, setSuggestions] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
-    useEffect(() => {
-        const filteredResults = results.filter(item =>
-            item.name.toLowerCase().includes(searchTerm.toLowerCase())
+  const fetchSuggestions = async (searchTerm2) => {
+    if (searchTerm2.trim() === '') {
+      setSuggestions([]);
+      return;
+    }
+
+    setIsLoading(true);
+
+    try {
+      const response = await axios.get(`https://pokeapi.co/api/v2/pokemon/?limit=1050`);
+
+      if (response.data.results && Array.isArray(response.data.results)) {
+        const pokemonNames = response.data.results.map((pokemon) => pokemon.name);
+        const filteredSuggestions = pokemonNames.filter((name) =>
+          name.includes(searchTerm2.toLowerCase())
         );
-        setSearchResults(filteredResults);
+        setSuggestions(filteredSuggestions.slice(0, 5));
+      } else {
+        setSuggestions([]);
+      }
+    } catch (error) {
+      console.error(error);
+    }
 
-        if (searchTerm !== "") {
-            const matchingSuggestions = results
-                .filter(item => item.name.toLowerCase().startsWith(searchTerm.toLowerCase()))
-                .map(item => item.name);
-            setSuggestions(matchingSuggestions);
-        } else {
-            setSuggestions([]);
-        }
-    }, [searchTerm, results, setSearchResults]);
+    setIsLoading(false);
+  };
 
-    const handleSuggestionClick = suggestion => {
-        setSearchTerm(suggestion);
-        setSuggestions([]); // Clear suggestions
-    };
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+    fetchSuggestions(newValue);
+  };
 
-    return (
-        <div>
-            <input
-                type="text"
-                className="form-control"
-                placeholder="Enter Pokémon name"
-                value={searchTerm}
-                onChange={e => setSearchTerm(e.target.value)}
-            />
-            <ul className="suggestions">
-                {suggestions.map((suggestion, index) => (
-                    <li key={index} onClick={() => handleSuggestionClick(suggestion)}>
-                        {suggestion}
-                    </li>
-                ))}
-            </ul>
-        </div>
-    );
-}
+  const handleSearch = () => {
+    onSearch(value);
+  };
 
-export default DynamicSearch;
+  return (
+    <div className="search-bar">
+      <Autocomplete
+        value={value}
+        onChange={(event, newValue) => {
+          setValue(newValue);
+        }}
+        options={suggestions}
+        filterOptions={(options, params) => {
+          const filtered = filter(options, params);
+
+          const { inputValue } = params;
+          const isExisting = options.some((option) => inputValue === option.title);
+          if (inputValue !== '' && !isExisting) {
+            filtered.push({
+              inputValue,
+              title: inputValue,
+            });
+          }
+
+          return filtered;
+        }}
+        selectOnFocus
+        clearOnBlur
+        handleHomeEndKeys
+        id="free-solo-with-text-demo"
+        getOptionLabel={(option) => option.title || option}
+        freeSolo
+        renderInput={(params) => (
+          <TextField
+            {...params}
+            className="custom-input" 
+            label="Search for a Pokémon"
+            onChange={(e) => handleChange(e, e.target.value)}
+          />
+        )}
+      />
+      {isLoading && <div className="loading">Loading suggestions...</div>}
+      <button className="btn btn-outline-secondary" type="button" onClick={handleSearch}>Search</button>
+    </div>
+  );
+};
+
+export default SearchBar;

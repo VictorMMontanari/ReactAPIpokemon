@@ -79,23 +79,28 @@ body {
 
 .MuiAutocomplete-paper {
   max-width: 300px; /* Defina o tamanho máximo desejado */
+  
 }
 
 .MuiAutocomplete-root {
   max-width: 300px; /* Defina o tamanho máximo desejado */
+  
 }
 
 #free-solo-with-text-demo {
   width: 100% !important;
   height: 15px !important;
   border-radius: 0px 0px 0px 0px !important; 
+  
 }
 
 .MuiInputBase-root.custom-input.MuiInputBase-formControl {
   width: 100%;
   border-radius: 0px 0px 0px 0px !important; 
+
 }
 
 .css-154xyx0-MuiInputBase-root-MuiOutlinedInput-root { 
   border-radius: 10px 0px 0px 10px !important; 
+
 }
