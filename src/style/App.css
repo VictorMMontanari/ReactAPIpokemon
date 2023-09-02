@@ -15,7 +15,10 @@ body {
 
 /* Search bar */
 .search-bar {
+  display: flex;
   position: relative;
+  width: 20rem;
+  height: 3rem;
 }
 
 /* Loading indicator */
@@ -61,6 +64,38 @@ body {
 }
 
 /* MUI Autocomplete dropdown height */
+
+.MuiInputBase-root.custom-input {
+  /* Seus estilos personalizados aqui */
+  width: 100%;
+  border-radius: 0px 0px 0px 0px !important; 
+  /* Outros estilos que você deseja aplicar */
+}
+
+.custom-input {
+  width: 100% !important;
+  border-radius: 0px 0px 0px 0px !important; 
+}
+
 .MuiAutocomplete-paper {
-  max-height: 200px; /* Adjust as needed */
+  max-width: 300px; /* Defina o tamanho máximo desejado */
+}
+
+.MuiAutocomplete-root {
+  max-width: 300px; /* Defina o tamanho máximo desejado */
+}
+
+#free-solo-with-text-demo {
+  width: 100% !important;
+  height: 15px !important;
+  border-radius: 0px 0px 0px 0px !important; 
+}
+
+.MuiInputBase-root.custom-input.MuiInputBase-formControl {
+  width: 100%;
+  border-radius: 0px 0px 0px 0px !important; 
+}
+
+.css-154xyx0-MuiInputBase-root-MuiOutlinedInput-root { 
+  border-radius: 10px 0px 0px 10px !important; 
 }

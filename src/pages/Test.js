@@ -3,7 +3,6 @@ import axios from 'axios';
 import Autocomplete, { createFilterOptions } from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
 import '../style/App.css';
-import '../style/busca.css';
 
 const filter = createFilterOptions();
 
@@ -52,7 +51,6 @@ const SearchBar = ({ onSearch }) => {
     <div className="search-bar">
       <Autocomplete
         value={value}
-        className="form-control" //verificar
         onChange={(event, newValue) => {
           setValue(newValue);
         }}
@@ -71,22 +69,23 @@ const SearchBar = ({ onSearch }) => {
 
           return filtered;
         }}
-     
-
-
+        selectOnFocus
+        clearOnBlur
+        handleHomeEndKeys
+        id="free-solo-with-text-demo"
         getOptionLabel={(option) => option.title || option}
         freeSolo
         renderInput={(params) => (
           <TextField
             {...params}
+            className="custom-input" 
             label="Search for a Pokémon"
-            className="form-control" //verificar
             onChange={(e) => handleChange(e, e.target.value)}
           />
         )}
       />
       {isLoading && <div className="loading">Loading suggestions...</div>}
-      <button className="btn btn-outline-secondary" onClick={handleSearch}>Search</button>
+      <button className="btn btn-outline-secondary" type="button" onClick={handleSearch}>Search</button>
     </div>
   );
 };
