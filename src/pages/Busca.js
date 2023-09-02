@@ -3,16 +3,18 @@ import "../style/result.css";
 import '../style/busca.css';
 import { useApi } from '../hooks/useApi';
 import { formatName, getTypeClass, getTypeStyle, formatType } from "../components/format";
-
+import SearchBar from "../components/DynamicSearch";
 
 function Result() {
     const [searchTerm, setSearchTerm] = useState('');
     const [searchResults, setSearchResults] = useState([]);
     const { pokemon, type } = useApi();
 
-    const handleSearch = async () => {
+    const handleSearch = async (searchTerm) => {
+        console.log(searchTerm);
         if (!searchTerm) {
             setSearchResults([]);
+            console.log("300")
             return;
         }
 
@@ -24,7 +26,7 @@ function Result() {
                     name: results.name,
                     image: results.sprites.other["official-artwork"].front_default,
                     pokemonId: results.id,
-                    typeNames: results.types.map(typeInfo => typeInfo.type.name) // Get the type names
+                    typeNames: results.types.map(typeInfo => typeInfo.type.name)
                 }]);
             } else {
                 setSearchResults([]);
@@ -72,24 +74,8 @@ function Result() {
                 <h1 className="logo">PokeAPI</h1>
                 <div className='acertar'>
                     <div className="input-group mb-3">
-
-                        <input
-                            type="text"
-                            className="form-control"
-                            placeholder="Recipient's username"
-                            aria-label="Recipient's username"
-                            aria-describedby="basic-addon2"
-                            value={searchTerm}
-                            onChange={e => setSearchTerm(e.target.value)}
-                        />
                         <div className="input-group-append">
-                            <button
-                                className="btn btn-outline-secondary"
-                                type="button"
-                                onClick={handleSearch}
-                            >
-                                Search
-                            </button>
+                             <SearchBar onSearch={handleSearch} />
                         </div>
                     </div>
                 </div>

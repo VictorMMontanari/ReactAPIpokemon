@@ -34,6 +34,17 @@ body {
     border-radius: 5px 0 0 5px;
   }
   
+  .input-group-append {
+    background-color: white;
+    display: flex;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    width: 21.3rem;
+    height: 4.3rem;
+    border-radius: 10px;
+  }
+
   .btn {
     background-color: #007bff;
     color: #fff;

@@ -94,6 +94,7 @@ function App() {
   const [selectedPokemon, setSelectedPokemon] = useState(null);
 
   const handleSearch = async (searchTerm) => {
+    console.log(searchTerm)
     if (!searchTerm) {
       setSelectedPokemon(null);
       return;
@@ -120,11 +121,11 @@ function App() {
     <div className="app">
       <h1>PokeAPI Search</h1>
       <SearchBar onSearch={handleSearch} />
-      {selectedPokemon && (
+     {selectedPokemon && (
         <div className="pokemon-details">
           {selectedPokemon.name}
         </div>
-      )}
+      )} 
     </div>
   );
 }
