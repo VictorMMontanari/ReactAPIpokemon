@@ -105,6 +105,9 @@ const EeveeComponent = ({ name, image, typeNames, pokemonId }) => {
                     ))}
                 </div>
                 <span className="pokeid">#{pokemonId.toString().padStart(3, '0')}</span>
+                <div className="t4eEv">
+                    <h4 className="th4e">Evolutionary Chain</h4>
+                </div>
                 <div className="evolutioImagesContainer">
                     <table className="evochain">
                         <tbody>
@@ -165,6 +168,9 @@ const EeveeComponent = ({ name, image, typeNames, pokemonId }) => {
                             </tr>
                         </tbody>
                     </table>
+                </div>
+                <div className="t4eBs">
+                        <h4 className="th4e">Base Stats</h4>
                 </div>
                 <table className="tabStats">
                     <tbody>
