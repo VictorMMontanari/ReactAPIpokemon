@@ -21,6 +21,9 @@ const OtherPokemonComponent = ({ name, image, typeNames, pokemonId, evolutionIma
                 ))}
             </div>
             <span className="pokeid">#{pokemonId.toString().padStart(3, '0')}</span>
+            <div className="t4eEv">
+                    <h4 className="th4e">Evolutionary Chain</h4>
+            </div>
             <div className="evolutioImagesContainer">
                 <table>
                     <tbody>
@@ -83,32 +86,35 @@ const OtherPokemonComponent = ({ name, image, typeNames, pokemonId, evolutionIma
                     </tbody>
                 </table>
             </div>
+            <div className="t4eBs">
+                    <h4 className="th4e">Base Stats</h4>
+            </div>
             <table className="tabStats">
-    <tbody>
-        <tr className="trStatsEx">
-            <td className="tdStats">
-                <div className="stats">
-                    {searchResults.map(result => (
-                        <VerticalProgressBar
-                            key={result.pokemonId}
-                            stats={result.stats} // Pass the stats data to the VerticalProgressBar
-                        />
-                    ))}
-                </div>
-            </td>
-        </tr>
-        <tr className="trStats">
-            <td className="tdStats">
-                {searchResults.map(result => (
-                    <PokemonWeaknesses
-                        key={result.pokemonId}
-                        pokemonName={result.name}
-                    />
-                ))}
-            </td>
-        </tr>
-    </tbody>
-</table>
+                <tbody>
+                    <tr className="trStatsEx">
+                        <td className="tdStats">
+                            <div className="stats">
+                                {searchResults.map(result => (
+                                    <VerticalProgressBar
+                                        key={result.pokemonId}
+                                        stats={result.stats} // Pass the stats data to the VerticalProgressBar
+                                    />
+                                ))}
+                            </div>
+                        </td>
+                    </tr>
+                    <tr className="trStats">
+                        <td className="tdStats">
+                            {searchResults.map(result => (
+                                <PokemonWeaknesses
+                                    key={result.pokemonId}
+                                    pokemonName={result.name}
+                                />
+                            ))}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
     ); 
